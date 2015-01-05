@@ -91,15 +91,25 @@ function getForm($pNumber) {
       $result = $mysqli->query($sqlGetForm);
       print_r($mysqli->error);
    }
+
    while($myRow = $result->fetch_array()) {
       $formKeys[] = $myRow['f_key'];
       $formNames[] = $myRow['f_name'];
    }
+   //session_start();
+   $_SESSION['formKeys'] = $formKeys;
+   $_SESSION['formNames'] = $formNames;
+
    // Skriv ut de skattningsformulär som patienten ska genomföra
    $n = count($formKeys);
    for ($i=0; $i < $n; $i++) {
       echo $formKeys[$i] . ' ' . $formNames[$i] . '<br />';
    }
+}
+
+// ----- Hämta formulärfrågor och alternativ -----
+function getQs() {
+
 }
 
 
