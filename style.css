@@ -1,75 +1,96 @@
-#main {
-    width:960px;
-    margin:50px auto;
+body{
+    background:#fff;
+    font-family:Helvetica, Arial, sans-serif;
 }
 
-span {
-    color:red
+table{
+    color:#2b2828;
 }
 
-h2 {
+p {
+    color:#2b2828;
+}
+
+h1 {
+    color:#2b2828;
     text-align:center;
-    border-radius:10px 10px 0 0;
-    margin:-10px -40px;
-    padding:15px
 }
 
-hr {
-    border:0;
-    border-bottom:1px solid #ccc;
-    margin:10px -40px;
-    margin-bottom:30px
-}
-
-.container {
-    width:50%;
-    margin:auto;
-    border-radius:10px;
-    border:2px solid #ccc;
-    padding:10px 40px 25px;
-    margin-top:70px
-}
-
-input[type=text],
-input[type=password] {
-    width:99.5%;
-    padding:10px;
-    margin-top:8px;
-    border:1px solid #ccc;
-    padding-left:5px;
-    font-size:16px;
-}
-
-input[type=submit] {
-    width:100%;
-    background-color:#6696CF;
+h2{
     color:#fff;
-    border:2px solid #95B9E4;
-    padding:10px;
-    font-size:20px;
-    cursor:pointer;
-    border-radius:5px;
-    margin-bottom:15px
+    text-align:center;
 }
 
-#profile {
-    padding:50px;
-    border:1px dashed grey;
-    font-size:20px;
-    background-color:#DCE6F7
+footer {
+    font-size:small;
+    text-align: center;
+    margin-top:5%;
 }
 
-#logout {
-    float:right;
+/*Banner*/
+header {
+    height:100px;
+    background:url(img/banner.png);
+    background-position: center;
+    margin-bottom:5%;
+}
+
+/*Bredd pÃ¥ 300px, centrerat*/
+.small-width {
+    width:300px;
+    margin:auto;
+    padding:1%;
+}
+
+/*Bredd pÃ¥ 460px, centrerat*/
+.med-width {
+    width:460px;
+    margin:auto;
+    padding:1%;
+}
+
+/*GrÃ¥ Bakgrund, blÃ¥ text*/
+.grey-bg {
+    color:#4987c7;
+    text-align:center;
+    background:#f2f2f2;
+}
+
+/*BlÃ¥ bakgrund, vit text*/
+.blue-bg {
+    background:#4987c7;
+    color:#ffffff;
+    overflow:auto;
+}
+
+/*Notifikation fÃ¶r nya skattningar*/
+#ny-skatt {
+    margin-bottom: 2%;
+}
+
+/*Modul fÃ¶r att skicka ny skattning*/
+#send-module label{
+    float:left;
+    clear:both;
+}
+
+#send-module input[type=text] {
+    width:40%;
+    font-size:16px;
+    border:1px solid #ccc;
     padding:5px;
-    border:dashed 1px gray
+    float:left;
+    clear:both;
 }
 
-a {
-    text-decoration:none;
-    color:#6495ed
+
+#send-module input[type=checkbox]{
 }
 
-i {
-    color:#6495ed
+#send-module input[type=submit] {
+    color:#4987c7;
+    float:right;
+    font-size:16px;
+    margin-left: 2%;
+    clear:both;
 }
