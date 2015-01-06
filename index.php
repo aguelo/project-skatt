@@ -14,8 +14,10 @@ require('functions.php');
     <title>Webbskattningsportalen</title>
 </head>
 	<body>
-		<header>
-		</header>
+		<div class="header-bg">
+			<header>
+			</header>
+		</div>	
 	   <div class="main">
 		   <h1>Webbskattningsportalen</h1>
 		   <div class="small-width grey-bg" id="ny-skatt">

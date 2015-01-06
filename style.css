@@ -1,6 +1,7 @@
 body{
     background:#fff;
     font-family:Helvetica, Arial, sans-serif;
+	margin:0;
 }
 
 p {
@@ -27,8 +28,20 @@ footer {
 header {
     height:100px;
     background:url(img/banner.png);
+	background-repeat: no-repeat;
     background-position: center;
     margin-bottom:5%;
+}
+
+.header-bg {
+	background: #4987c7; /* Old browsers */
+	background: -moz-linear-gradient(45deg,  #4987c7 0%, #2989d8 50%, #266db5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#4987c7), color-stop(50%,#2989d8), color-stop(100%,#266db5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg,  #4987c7 0%,#2989d8 50%,#266db5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg,  #4987c7 0%,#2989d8 50%,#266db5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg,  #4987c7 0%,#2989d8 50%,#266db5 100%); /* IE10+ */
+	background: linear-gradient(45deg,  #4987c7 0%,#2989d8 50%,#266db5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4987c7', endColorstr='#266db5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 /*Bredd pÃ¥ 300px, centrerat*/
@@ -56,7 +69,6 @@ header {
 .blue-bg {
     background:#4987c7;
     color:#ffffff;
-    overflow:auto;
 }
 
 /*Notifikation fÃ¶r nya skattningar*/
@@ -79,17 +91,28 @@ header {
     clear:both;
 }
 
-
-#send-module input[type=checkbox]{
+#send-module input[type=submit], input[type=checkbox]{
+    color:#4987c7;
+    font-size:16px;
+    margin-left: 4%;
+    clear:both;
 }
 
 #send-module input[type=submit] {
-    color:#4987c7;
-    float:right;
-    font-size:16px;
-    margin-left: 2%;
-    clear:both;
+	background: #82bbf5;
+	color: #fff;
+	width: 51%;
+	border: 2px solid #95b9e4;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 20px;
 }
+
+#send-module input[type=submit]:hover {
+	background-color:#4987c7;
+	color:#fff;
+}
+
 
 /*Login*/
 form {
@@ -108,7 +131,7 @@ form {
 }
 
 #login input[type=submit] {
-	background:#4987c7;
+	background:#82bbf5;
 	color:#fff;
 	width:100%;
 	border:2px solid #95b9e4;
@@ -121,5 +144,6 @@ form {
 }
 
 #login input[type=submit]:hover {
-	background-color:#95b9e4;
+	background-color:#4987c7;
+	color:#fff;
 }
