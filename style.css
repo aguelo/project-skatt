@@ -9,13 +9,14 @@ p {
 }
 
 h1 {
-    color:#2b2828;
+    color:#333;
     text-align:center;
 }
 
 h2{
     color:#fff;
     text-align:center;
+	margin:5px;
 }
 
 footer {
@@ -129,7 +130,7 @@ form {
 
 #login {
 	border-radius: 10px;
-	padding:10px 40px 25px;
+	padding:10px 20px 15px;
 }
 
 #login input[type=text], input[type=password] {
