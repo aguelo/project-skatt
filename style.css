@@ -3,10 +3,6 @@ body{
     font-family:Helvetica, Arial, sans-serif;
 }
 
-table{
-    color:#2b2828;
-}
-
 p {
     color:#2b2828;
 }
@@ -93,4 +89,37 @@ header {
     font-size:16px;
     margin-left: 2%;
     clear:both;
+}
+
+/*Login*/
+form {
+	display: block;
+}
+
+#login {
+	border-radius: 10px;
+	padding:10px 40px 25px;
+}
+
+#login input[type=text], input[type=password] {
+	width:94.5%;
+	font-size:16px;
+	padding:10px;
+}
+
+#login input[type=submit] {
+	background:#4987c7;
+	color:#fff;
+	width:100%;
+	border:2px solid #95b9e4;
+	border-radius:5px;
+	padding:10px;
+	cursor:pointer;
+	font-size:20px;
+	margin-top:15px;
+	
+}
+
+#login input[type=submit]:hover {
+	background-color:#95b9e4;
 }

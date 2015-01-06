@@ -13,7 +13,7 @@ require('functions.php');
     <body>
         <div id="main">
             <h1>Skattning Login Session</h1>
-            <div class="container">
+            <div class="med-width blue-bg" id="login">
                 <h2>Login Form</h2>
                 <form name="form1" method="post" action="checklogin.php">
                     <label>UserName :</label>
