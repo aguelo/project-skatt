@@ -53,7 +53,8 @@ header {
 
 /*Bredd pÃ¥ 460px, centrerat*/
 .med-width {
-    width:460px;
+	width:40%;
+    min-width:460px;
     margin:auto;
     padding:1%;
 }
@@ -77,6 +78,10 @@ header {
 }
 
 /*Modul fÃ¶r att skicka ny skattning*/
+#send-module {
+	overflow: auto;
+}
+
 #send-module label{
     float:left;
     clear:both;
@@ -106,6 +111,9 @@ header {
 	border-radius: 5px;
 	cursor: pointer;
 	font-size: 20px;
+	position:relative;
+	top:83px;
+
 }
 
 #send-module input[type=submit]:hover {

@@ -15,13 +15,13 @@ function randomPassword() {
 function firstForm() {
    echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
    echo '<label for="patient_number">Personnummer: </label>';
-   echo '<input name="patient_number" type="text"> <br />';
+   echo '<input name="patient_number" type="text">';
    echo '<label for="patient_firstname">Förnamn: </label>';
-   echo '<input name="patient_firstname" type="text"> <br />';
+   echo '<input name="patient_firstname" type="text">';
    echo '<label for="patient_lastname">Efternamn: </label>';
-   echo '<input name="patient_lastname" type="text"> <br />';
+   echo '<input name="patient_lastname" type="text">';
    echo '<label for="patient_email">Epostadress: </label>';
-   echo '<input name="patient_email" type="text"> <br /><br />';
+   echo '<input name="patient_email" type="text">';
 
    $sqlForms = "SELECT f_key, f_code, f_name FROM FORM;";
 
@@ -29,12 +29,11 @@ function firstForm() {
       $result = $mysqli->query($sqlForms);
       print_r($mysqli->error);
    }
-
+	echo '<br />';
    while($myRow = $result->fetch_array()) {
       echo '<input name="form[ ]" type="checkbox" value="' . $myRow['f_key'] . '">';
       echo $myRow['f_code'] . ' / ' . $myRow['f_name'] . '<br />';
    }
-   echo '<br />';
    echo '<input name="generate" type="submit" value="Skicka skattning">';
    echo '</form>';
 }
