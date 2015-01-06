@@ -21,7 +21,7 @@ function firstForm() {
    echo '<label for="patient_lastname">Efternamn: </label>';
    echo '<input name="patient_lastname" type="text"> <br />';
    echo '<label for="patient_email">Epostadress: </label>';
-   echo '<input name="patient_email" type="text"> <br /><br />';
+   echo '<input name="patient_email" type="text"> <br />';
 
    $sqlForms = "SELECT f_key, f_code, f_name FROM FORM;";
 
@@ -106,9 +106,65 @@ function getForm($pNumber) {
       echo $formKeys[$i] . ' ' . $formNames[$i] . '<br />';
    }
 }
+// Hämta alternativ till frågefunktion -----
+function getAlts($key) {
+   $kk = 0;
+   while ($kk < 4) {
+      $sqlGetAlts = "SELECT ALT.alt_key, ALT.alt_string FROM ALT WHERE ALT.q_key = '$key';";
+
+      // SQL Error message
+      if ($mysqli = connect_db()) {
+         $result = $mysqli->query($sqlGetAlts);
+         print_r($mysqli->error);
+      }
+      while($myRow = $result->fetch_array()) {
+         session_start();
+         $_SESSION['alt_key'] = $altKeys;
+         $_SESSION['alt_string'] = $altStrings;
+         $altKeys[] = $myRow['alt_key'];
+         $altStrings[] = $myRow['alt_string'];
+      }
+      //echo '<input type="radio" value="' . $altKeys[$kk] . '" name="alt" id="' . $altKeys[$kk] . '" ><label for="' . $altKeys[$kk] . '" >'. $altStrings[$kk] .'</label>';
+
+      $kk++;
+   }
+}
 
 // ----- Hämta formulärfrågor och alternativ -----
-function getQs() {
+function getQs($key) {
+   $jj = 0;
+   while($jj < 10) {
+      $sqlGetQs  = "SELECT QUESTION.q_key, QUESTION.q_string FROM QUESTION WHERE QUESTION.f_key = '$key';";
+
+      // SQL Error message
+      if ($mysqli = connect_db()) {
+         $result = $mysqli->query($sqlGetQs);
+         print_r($mysqli->error);
+      }
+      while($myRow = $result->fetch_array()) {
+         session_start();
+         $_SESSION['q_key'] = $qKeys;
+         $_SESSION['q_string'] = $questions;
+         $qKeys[] = $myRow['q_key'];
+         $questions[] = $myRow['q_string'];
+      }
+      echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+      //echo $questions[$jj] . ' <br />';
+
+      getAlts($qKeys[$jj]);
+      echo $_SESSION['q_string'][$jj] . '<br />';
+         $mm = 0;
+         while ($mm < 4) {
+            echo '<input type="radio" value="' . $_SESSION['alt_key'][$mm] . '" name="alt" id="' . $_SESSION['alt_key'][$mm] . '" ><label for="' . $_SESSION['alt_key'][$mm] . '" >'. $_SESSION['alt_string'][$mm] . '</label>';
+            echo '<br />';
+            $mm++;
+         }
+
+      echo '<input name="next" type=submit value="Nästa fråga">';
+      echo '</form>';
+      echo '<br />';
+      $jj++;
+   }
 
 }
 

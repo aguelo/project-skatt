@@ -20,7 +20,8 @@ require('functions.php');
          <p>
             <?php
             session_start();
-               if (!isset($_POST['send']) && !isset($_POST['start']) && !isset($_POST['skicka'])) {
+            $_SESSION['alt_string'] = $altStrings;
+               if (!isset($_POST['send']) && !isset($_POST['start']) && !isset($_POST['next'])) {
                   echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
                   echo '<label for="patient_number">Personnummer: </label>';
                   echo '<input name="patient_number" type="text"> <br />';
@@ -32,7 +33,7 @@ require('functions.php');
                   $pNumber = $_POST['patient_number'];
                   $_SESSION['patient_number'] = $pNumber;
 
-                  if (!isset($_POST['start']) && !isset($_POST['skicka'])) {
+                  if (!isset($_POST['start']) && !isset($_POST['next'])) {
                      echo 'Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. <br />';
 
                      getForm($pNumber);
@@ -43,55 +44,25 @@ require('functions.php');
                   }
                   else {
 
-                     for($i = 0; $i < 10; $i++) {
-                        $fKey[$i] = $_SESSION["formKeys"][$i];
-                        //echo $fKey[$i];
+                     $fKey = $_SESSION['formKeys'];
+                     $fNames = $_SESSION['formNames'];
+                     $formCount = count($fKey);
+                     //echo $formCount;
+                     //echo '<br />';
+                     $ii = 0;
 
-                     $sqlGetQs  = "SELECT QUESTION.q_key, QUESTION.q_string FROM QUESTION INNER JOIN FORM ON QUESTION.f_key = FORM.f_key WHERE FORM.f_key = '$fKey[$i]';";
+                     while($ii < $formCount) {
+                        echo '<h3>' . $fNames[$ii] . ' </h3><br />';
 
-                     // SQL Error message
-                     if ($mysqli = connect_db()) {
-                        $result = $mysqli->query($sqlGetQs);
-                        print_r($mysqli->error);
-                     }
-                     while($myRow = $result->fetch_array()) {
-                        $qKeys[] = $myRow['q_key'];
-                        $questions[] = $myRow['q_string'];
-                     }
-                     echo $questions[$i] . "<br />";
-                     echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+                        getQs($fKey[$ii]);
 
-                     for($j = 0; $j < 4; $j++) {
-                        $sqlGetAlts = "SELECT ALT.alt_key, ALT.alt_string FROM ALT INNER JOIN QUESTION ON ALT.q_key = QUESTION.q_key WHERE QUESTION.q_key = '$qKeys[$j]';";
+                        //echo $_SESSION['alt_string'][0];
 
-                        // SQL Error message
-                        if ($mysqli = connect_db()) {
-                           $result = $mysqli->query($sqlGetAlts);
-                           print_r($mysqli->error);
-                        }
-                        while($myRow = $result->fetch_array()) {
-                           $altKeys[] = $myRow['alt_key'];
-                           $altStrings[] = $myRow['alt_string'];
-                        }
-                        // echo '<input name="answer_key" type="hidden" value="' .  . '"/>';
-                        echo '<input name="answer" type="radio" value="' . $altKeys[$j] . '">';
-                        echo $altStrings[$j];
-                     }
-                     echo '<input name="next" type="submit" value="Nästa fråga" >';
-                     echo '</form>';
+                        echo '<br />';
+                        $ii++;
 
-                     echo '<br /> <br />';
                      }
 
-
-                     if (isset($_POST['skicka'])) {
-                        $answers = $_POST['answer'];
-                        $_SESSION['answer'] = $answers;
-                        echo $answers;
-                     }
-
-
-                     // $alts[] = $myRow['alt_string'];
                   }
                }
             ?>
