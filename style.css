@@ -73,6 +73,11 @@ header {
     color:#ffffff;
 }
 
+.blue-bg p {
+	color:#fff;
+	text-align:center;
+}
+
 /*Notifikation fÃ¶r nya skattningar*/
 #ny-skatt {
     margin-bottom: 2%;
