@@ -11,6 +11,10 @@ require('functions.php');
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Webbskattningsportalen</title>
     <body>
+		<div class="header-bg">
+			<header>
+			</header>
+		</div>
         <div id="main">
             <h1>Skattning Login Session</h1>
             <div class="med-width blue-bg" id="login">
