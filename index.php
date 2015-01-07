@@ -37,6 +37,9 @@ require('functions.php');
                   // ...och minst ett formulär valt
                   if(empty($formToSend)) {
                      echo 'Du valde inga formulär att skicka med i skattningen!';
+					 echo '<form method="post" action="index.php">
+					 		<button type="submit">Skicka skattning</button>
+							</form>';
                   }
                   // Om minst ett formulär ifyllt...
                   else {

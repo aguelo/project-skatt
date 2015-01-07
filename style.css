@@ -161,6 +161,19 @@ header {
 	color:#fff;
 }
 
+#send-module button[type=submit] {
+	background:#61a1e2;
+	color:#fff;
+	font-size:16px;
+	border:2px solid #ccc;
+	border-radius:10px;
+	cursor: pointer;
+	
+}
+
+#send-module button[type=submit]:hover {
+	background:#4987c7;
+}
 
 /*Login*/
 form {
