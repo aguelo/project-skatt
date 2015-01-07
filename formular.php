@@ -20,8 +20,8 @@
              <h2>Heading!</h2>
              <p>
                 <?php
-                      echo 'Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. <br />';
-                      getForm($_SESSION['p_number']);
+                    echo 'Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. <br />';
+                    getForm($_SESSION['p_number']);
                 ?>
              </p>
           </div>
