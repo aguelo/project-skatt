@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['p_number'])) {
+        header('Location: login.php');
+    }
     include('db_connection.php');
     require('functions.php');
 ?>
@@ -16,25 +20,8 @@
              <h2>Heading!</h2>
              <p>
                 <?php
-                   if (!isset($_POST['send'])) {
-                      echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
-                      echo '<label for="patient_number">Personnummer: </label>';
-                      echo '<input name="patient_number" type="text"> <br />';
-                      echo '<input name="send" type="submit" value="Login">';
-                      echo '</form>';
-                   }
-                   else if (empty($_POST['patient_number'])){
-                      echo 'Du angav fel eller inget personnummer.';
-                   }
-                   else {
-
-                      $pNumber = $_POST['patient_number'];
-
-                      echo 'Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. <br />';
-
-                      getForm($pNumber);
-
-                   }
+                    echo 'Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. <br />';
+                    getForm($_SESSION['p_number']);
                 ?>
              </p>
           </div>
@@ -42,5 +29,6 @@
     </body>
     <footer>
        <p>Skapad av oss</p>
+       <a href="logout.php">Logga ut</a>
     </footer>
 </html>
