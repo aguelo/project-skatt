@@ -168,6 +168,8 @@ header {
 	border:2px solid #ccc;
 	border-radius:10px;
 	cursor: pointer;
+	width:100%;
+	padding:10px;
 	
 }
 

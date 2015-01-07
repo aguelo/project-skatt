@@ -67,6 +67,9 @@ function sendEmail($patientEmail, $patientPass) {
    $msg = 'Hej! Här kommer din webbskattning. Klicka på länken nedan för att logga in med ditt personnummer och koden: ' . $patientPass;
    mail($patientEmail, 'Webbskattning', $msg);
    echo 'Email sent to ' . $patientEmail;
+	echo '<form method="post" action="index.php">
+			<button type="submit">Tillbaka</button>
+		</form>';
 }
 
 // ----- getLogin -----

@@ -21,10 +21,10 @@ require('functions.php');
 	   <div class="main">
 		   <h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
 		   <div class="med-width grey-bg" id="ny-skatt">
-			   <a href="incoming.php">Nya skattningar! <img src="img/warning.svg"></a>
+			   <a href="newforms.php">Nya skattningar! <img src="img/warning.svg"></a>
 		   </div>
 		  <div class="med-width blue-bg" id="send-module">
-			 <h2>Skicka ny skattning</h2>
+			 	
 				<p>
                <?php
                if (isset($_POST['generate'])) {
@@ -72,6 +72,7 @@ require('functions.php');
                   }
                }
                else {
+				   	echo'<h2>Skicka ny skattning</h2>';
                   	session_start();
                 	firstForm();
                	}
