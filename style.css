@@ -53,7 +53,9 @@ header {
 }
 
 .logo {
-	max-width:30%;
+	max-width:300px;
+	max-height:175px;
+	min-height:100px;
 }
 
 /*Container, width 300px, centered*/
@@ -96,6 +98,15 @@ header {
 .blue-bg p {
 	color:#fff;
 	text-align:center;
+}
+
+.blue-bg a {
+	color:#fff;
+	text-decoration:none;
+}
+
+.blue-bg a:hover {
+	color:#ccc;
 }
 
 /*Notification for new incoming form*/
@@ -169,7 +180,7 @@ form {
 }
 
 #login input[type=submit] {
-	background:#82bbf5;
+	background:#61a1e2;
 	color:#fff;
 	width:100%;
 	border:2px solid #95b9e4;
@@ -184,4 +195,9 @@ form {
 #login input[type=submit]:hover {
 	background-color:#4987c7;
 	color:#fff;
+}
+
+/*Incoming forms*/
+#inkommen {
+	margin-bottom:2%;
 }

@@ -16,7 +16,7 @@
 			</header>
 		</div>
 	   <div class="main">
-		   <a href="index.php"><h1><img class="logo" src="img/portalen.png"></h1></a>
+		   <h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
 		   <div class="med-width grey-bg" id="ny-skatt">
 			   <a href="incoming.php">Nya skattningar! <img src="img/warning.svg"></a>
 		   </div>
