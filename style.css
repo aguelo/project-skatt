@@ -1,75 +1,158 @@
-#main {
-    width:960px;
-    margin:50px auto;
+body{
+    background:#fff;
+    font-family:Helvetica, Arial, sans-serif;
+	margin:0;
 }
 
-span {
-    color:red
+p {
+    color:#2b2828;
 }
 
-h2 {
+h1 {
+    color:#333;
     text-align:center;
-    border-radius:10px 10px 0 0;
-    margin:-10px -40px;
-    padding:15px
 }
 
-hr {
-    border:0;
-    border-bottom:1px solid #ccc;
-    margin:10px -40px;
-    margin-bottom:30px
-}
-
-.container {
-    width:50%;
-    margin:auto;
-    border-radius:10px;
-    border:2px solid #ccc;
-    padding:10px 40px 25px;
-    margin-top:70px
-}
-
-input[type=text],
-input[type=password] {
-    width:99.5%;
-    padding:10px;
-    margin-top:8px;
-    border:1px solid #ccc;
-    padding-left:5px;
-    font-size:16px;
-}
-
-input[type=submit] {
-    width:100%;
-    background-color:#6696CF;
+h2{
     color:#fff;
-    border:2px solid #95B9E4;
-    padding:10px;
-    font-size:20px;
-    cursor:pointer;
-    border-radius:5px;
-    margin-bottom:15px
+    text-align:center;
+	margin:5px;
 }
 
-#profile {
-    padding:50px;
-    border:1px dashed grey;
-    font-size:20px;
-    background-color:#DCE6F7
+footer {
+    font-size:small;
+    text-align: center;
+    margin-top:5%;
 }
 
-#logout {
-    float:right;
+/*Banner*/
+header {
+    height:100px;
+    background:url(img/banner.png);
+	background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom:5%;
+}
+
+.header-bg {
+	background: #4987c7; /* Old browsers */
+	background: -moz-linear-gradient(45deg,  #4987c7 0%, #2989d8 50%, #266db5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#4987c7), color-stop(50%,#2989d8), color-stop(100%,#266db5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg,  #4987c7 0%,#2989d8 50%,#266db5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg,  #4987c7 0%,#2989d8 50%,#266db5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg,  #4987c7 0%,#2989d8 50%,#266db5 100%); /* IE10+ */
+	background: linear-gradient(45deg,  #4987c7 0%,#2989d8 50%,#266db5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4987c7', endColorstr='#266db5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+/*Bredd pÃ¥ 300px, centrerat*/
+.small-width {
+    width:300px;
+    margin:auto;
+    padding:1%;
+}
+
+/*Bredd pÃ¥ 460px, centrerat*/
+.med-width {
+	width:40%;
+    min-width:460px;
+    margin:auto;
+    padding:1%;
+}
+
+/*GrÃ¥ Bakgrund, blÃ¥ text*/
+.grey-bg {
+    color:#4987c7;
+    text-align:center;
+    background:#f2f2f2;
+}
+
+/*BlÃ¥ bakgrund, vit text*/
+.blue-bg {
+    background:#4987c7;
+    color:#ffffff;
+}
+
+/*Notifikation fÃ¶r nya skattningar*/
+#ny-skatt {
+    margin-bottom: 2%;
+}
+
+/*Modul fÃ¶r att skicka ny skattning*/
+#send-module {
+	overflow: auto;
+}
+
+#send-module label{
+    float:left;
+    clear:both;
+}
+
+#send-module input[type=text] {
+    width:40%;
+    font-size:16px;
+    border:1px solid #ccc;
     padding:5px;
-    border:dashed 1px gray
+    float:left;
+    clear:both;
 }
 
-a {
-    text-decoration:none;
-    color:#6495ed
+#send-module input[type=submit], input[type=checkbox]{
+    color:#4987c7;
+    font-size:16px;
+    margin-left: 4%;
+    clear:both;
 }
 
-i {
-    color:#6495ed
+#send-module input[type=submit] {
+	background: #82bbf5;
+	color: #fff;
+	width: 51%;
+	border: 2px solid #95b9e4;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 20px;
+	position:relative;
+	top:83px;
+
+}
+
+#send-module input[type=submit]:hover {
+	background-color:#4987c7;
+	color:#fff;
+}
+
+
+/*Login*/
+form {
+	display: block;
+}
+
+#login {
+	border-radius: 10px;
+	padding:10px 20px 15px;
+}
+
+#login input[type=text], input[type=password] {
+	width:94.5%;
+	font-size:16px;
+	padding:10px;
+}
+
+#login input[type=submit] {
+	background:#82bbf5;
+	color:#fff;
+	width:100%;
+	border:2px solid #95b9e4;
+	border-radius:5px;
+	padding:10px;
+	cursor:pointer;
+	font-size:20px;
+	margin-top:15px;
+
+}
+
+#login input[type=submit]:hover {
+	background-color:#4987c7;
+	color:#fff;
 }
