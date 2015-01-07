@@ -6,5 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Webbskattningsportalen</title>
-    <body></body>
+    <body>
+		<div class="header-bg">
+			<header>
+			</header>
+		</div>
+	</body>
 </html>
