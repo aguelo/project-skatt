@@ -21,7 +21,7 @@
 
     if($count==1){
         $_SESSION['p_number'] = $_POST['username'];
-        header('Location: login_success.php');
+        header('Location: formular.php');
         exit;
     }
 
