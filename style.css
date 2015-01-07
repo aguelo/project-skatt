@@ -161,7 +161,6 @@ header {
 	color:#fff;
 }
 
-
 /*Login*/
 form {
 	display: block;
@@ -190,7 +189,7 @@ form {
 	cursor:pointer;
 	font-size:20px;
 	margin-top:15px;
-	
+
 }
 
 #login input[type=submit]:hover {
