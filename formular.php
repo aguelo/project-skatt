@@ -19,51 +19,25 @@ require('functions.php');
          <h2>Heading!</h2>
          <p>
             <?php
-            session_start();
-            $_SESSION['alt_string'] = $altStrings;
-               if (!isset($_POST['send']) && !isset($_POST['start']) && !isset($_POST['next'])) {
+               if (!isset($_POST['send'])) {
                   echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
                   echo '<label for="patient_number">Personnummer: </label>';
                   echo '<input name="patient_number" type="text"> <br />';
                   echo '<input name="send" type="submit" value="Login">';
                   echo '</form>';
                }
+               else if (empty($_POST['patient_number'])){
+                  echo 'Du angav fel eller inget personnummer.';
+               }
                else {
 
                   $pNumber = $_POST['patient_number'];
-                  $_SESSION['patient_number'] = $pNumber;
 
-                  if (!isset($_POST['start']) && !isset($_POST['next'])) {
-                     echo 'Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. <br />';
+                  echo 'Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. <br />';
 
-                     getForm($pNumber);
+                  getForm($pNumber);
 
-                     echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
-                     echo '<input name="start" type="submit" value="Starta">';
-                     echo '</form>';
-                  }
-                  else {
 
-                     $fKey = $_SESSION['formKeys'];
-                     $fNames = $_SESSION['formNames'];
-                     $formCount = count($fKey);
-                     //echo $formCount;
-                     //echo '<br />';
-                     $ii = 0;
-
-                     while($ii < $formCount) {
-                        echo '<h3>' . $fNames[$ii] . ' </h3><br />';
-
-                        getQs($fKey[$ii]);
-
-                        //echo $_SESSION['alt_string'][0];
-
-                        echo '<br />';
-                        $ii++;
-
-                     }
-
-                  }
                }
             ?>
          </p>

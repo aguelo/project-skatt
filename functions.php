@@ -96,21 +96,30 @@ function getForm($pNumber) {
       $formKeys[] = $myRow['f_key'];
       $formNames[] = $myRow['f_name'];
    }
-   //session_start();
-   $_SESSION['formKeys'] = $formKeys;
-   $_SESSION['formNames'] = $formNames;
 
+   session_start();
+   $_SESSION['form_keys'] = $formKeys;
+   $_SESSION['form_names'] = $formNames;
+   $_SESSION['this_form_key'] = $thisFormKey;
+   $_SESSION['form_count'] = $formCount;
+
+   $formCount = count($formKeys);
    // Skriv ut de skattningsformulär som patienten ska genomföra
-   $n = count($formKeys);
-   for ($i=0; $i < $n; $i++) {
+   for ($i=0; $i < $formCount; $i++) {
       echo $formKeys[$i] . ' ' . $formNames[$i] . '<br />';
+      echo '<form action="formular-single.php" method="post">';
+      echo '<input type="hidden"name="this_form_key" value="' . ($formKeys[$i] - 1) . '">';
+      echo '<input name="start" type="submit" value="Starta denna skattning">';
+      echo '</form>';
+
    }
+
 }
 // Hämta alternativ till frågefunktion -----
-function getAlts($key) {
+function getAlts($fKey, $qKey) {
    $kk = 0;
    while ($kk < 4) {
-      $sqlGetAlts = "SELECT ALT.alt_key, ALT.alt_string FROM ALT WHERE ALT.q_key = '$key';";
+      $sqlGetAlts = "SELECT ALT.alt_key, ALT.alt_string FROM ALT INNER JOIN FORM INNER JOIN QUESTION ON FORM.f_key = QUESTION.f_key AND QUESTION.q_key = ALT.q_key WHERE FORM.f_key = '$fKey' AND ALT.q_key = '$qKey';";
 
       // SQL Error message
       if ($mysqli = connect_db()) {
@@ -118,14 +127,12 @@ function getAlts($key) {
          print_r($mysqli->error);
       }
       while($myRow = $result->fetch_array()) {
-         session_start();
-         $_SESSION['alt_key'] = $altKeys;
-         $_SESSION['alt_string'] = $altStrings;
          $altKeys[] = $myRow['alt_key'];
          $altStrings[] = $myRow['alt_string'];
       }
-      //echo '<input type="radio" value="' . $altKeys[$kk] . '" name="alt" id="' . $altKeys[$kk] . '" ><label for="' . $altKeys[$kk] . '" >'. $altStrings[$kk] .'</label>';
-
+      session_start();
+      $_SESSION['alt_key'] = $altKeys;
+      $_SESSION['alt_string'] = $altStrings;
       $kk++;
    }
 }
@@ -142,31 +149,14 @@ function getQs($key) {
          print_r($mysqli->error);
       }
       while($myRow = $result->fetch_array()) {
-         session_start();
-         $_SESSION['q_key'] = $qKeys;
-         $_SESSION['q_string'] = $questions;
          $qKeys[] = $myRow['q_key'];
          $questions[] = $myRow['q_string'];
       }
-      echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
-      //echo $questions[$jj] . ' <br />';
-
-      getAlts($qKeys[$jj]);
-      echo $_SESSION['q_string'][$jj] . '<br />';
-         $mm = 0;
-         while ($mm < 4) {
-            echo '<input type="radio" value="' . $_SESSION['alt_key'][$mm] . '" name="alt" id="' . $_SESSION['alt_key'][$mm] . '" ><label for="' . $_SESSION['alt_key'][$mm] . '" >'. $_SESSION['alt_string'][$mm] . '</label>';
-            echo '<br />';
-            $mm++;
-         }
-
-      echo '<input name="next" type=submit value="Nästa fråga">';
-      echo '</form>';
-      echo '<br />';
+      session_start();
+      $_SESSION['q_key'] = $qKeys;
+      $_SESSION['q_string'] = $questions;
       $jj++;
    }
-
 }
-
 
 ?>
