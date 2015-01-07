@@ -29,7 +29,7 @@ function firstForm() {
       $result = $mysqli->query($sqlForms);
       print_r($mysqli->error);
    }
-
+   echo '<br />';
    while($myRow = $result->fetch_array()) {
       echo '<input name="form[ ]" type="checkbox" value="' . $myRow['f_key'] . '">';
       echo $myRow['f_code'] . ' / ' . $myRow['f_name'] . '<br />';
