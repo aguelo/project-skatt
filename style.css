@@ -11,12 +11,18 @@ p {
 h1 {
     color:#333;
     text-align:center;
+	margin:0 0 2% 0;
 }
 
 h2{
     color:#fff;
     text-align:center;
 	margin:5px;
+}
+
+a {
+	color:#4987c7;
+	text-decoration:none;
 }
 
 footer {
@@ -31,9 +37,10 @@ header {
     background:url(img/banner.png);
 	background-repeat: no-repeat;
     background-position: center;
-    margin-bottom:5%;
+    margin-bottom:2%;
 }
 
+/*Gradient for banner*/
 .header-bg {
 	background: #4987c7; /* Old browsers */
 	background: -moz-linear-gradient(45deg,  #4987c7 0%, #2989d8 50%, #266db5 100%); /* FF3.6+ */
@@ -45,14 +52,18 @@ header {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4987c7', endColorstr='#266db5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-/*Bredd pÃ¥ 300px, centrerat*/
+.logo {
+	max-width:30%;
+}
+
+/*Container, width 300px, centered*/
 .small-width {
     width:300px;
     margin:auto;
     padding:1%;
 }
 
-/*Bredd pÃ¥ 460px, centrerat*/
+/*Container, width 460px, centered*/
 .med-width {
 	width:40%;
     min-width:460px;
@@ -60,26 +71,41 @@ header {
     padding:1%;
 }
 
-/*GrÃ¥ Bakgrund, blÃ¥ text*/
+/*Grey background, blue text*/
 .grey-bg {
     color:#4987c7;
     text-align:center;
     background:#f2f2f2;
 }
 
-/*BlÃ¥ bakgrund, vit text*/
+.grey-bg a {
+	color:#4987c7;
+	text-decoration:none;
+}
+
+.grey-bg a:hover {
+	color:#61a1e2;
+}
+
+/*Blue background, white text*/
 .blue-bg {
     background:#4987c7;
     color:#ffffff;
 }
 
-/*Notifikation fÃ¶r nya skattningar*/
-#ny-skatt {
-    margin-bottom: 2%;
+.blue-bg p {
+	color:#fff;
+	text-align:center;
 }
 
-/*Modul fÃ¶r att skicka ny skattning*/
+/*Notification for new incoming form*/
+#ny-skatt {
+	border-radius:10px 10px 0px 0px;
+}
+
+/*Module for new form*/
 #send-module {
+	border-radius:0px 0px 10px 10px;
 	overflow: auto;
 }
 
@@ -92,7 +118,9 @@ header {
     width:40%;
     font-size:16px;
     border:1px solid #ccc;
+	border-radius:10px;
     padding:5px;
+	margin-bottom:2px;
     float:left;
     clear:both;
 }
@@ -105,7 +133,7 @@ header {
 }
 
 #send-module input[type=submit] {
-	background: #82bbf5;
+	background: #61a1e2;
 	color: #fff;
 	width: 51%;
 	border: 2px solid #95b9e4;
@@ -113,7 +141,7 @@ header {
 	cursor: pointer;
 	font-size: 20px;
 	position:relative;
-	top:83px;
+	top:90px;
 
 }
 
@@ -137,6 +165,8 @@ form {
 	width:94.5%;
 	font-size:16px;
 	padding:10px;
+	border:1px solid #ccc;
+	border-radius:10px;
 }
 
 #login input[type=submit] {
