@@ -34,10 +34,10 @@
                           // Om knapp är tryckt
                           // ...och minst ett formulär valt
                           if(empty($formToSend)) {
-                             echo "Du valde inga formulär att skicka med i skattningen!";
-							 echo '<form method="post" action="index.php">
-					 					<button type="submit">Tillbaka</button>
-									</form>'; 
+                        	echo "Du valde inga formulär att skicka med i skattningen!";
+				echo '<form method="post" action="index.php">
+					<button type="submit">Tillbaka</button>
+					</form>'; 
                           }
                           // Om minst ett formulär ifyllt...
                           else {
