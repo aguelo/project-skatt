@@ -11,5 +11,10 @@
 			<header>
 			</header>
 		</div>
+		<h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
+		
+		<div class="med-width grey-bg" id="inkommen">
+			En inkommen skattning
+		</div>
 	</body>
 </html>
