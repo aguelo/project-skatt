@@ -19,9 +19,9 @@ require('functions.php');
 			</header>
 		</div>
 	   <div class="main">
-		   <h1>Webbskattningsportalen</h1>
-		   <div class="small-width grey-bg" id="ny-skatt">
-			   Nya skattningar!
+		   <a href="index.php"><h1><img class="logo" src="img/portalen.png"></h1></a>
+		   <div class="med-width grey-bg" id="ny-skatt">
+			   <a href="incoming.php">Nya skattningar! <img src="img/warning.svg"></a>
 		   </div>
 		  <div class="med-width blue-bg" id="send-module">
 			 <h2>Skicka ny skattning</h2>

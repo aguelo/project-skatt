@@ -16,7 +16,7 @@ require('functions.php');
 			</header>
 		</div>
         <div id="main">
-            <h1>Skattning Login Session</h1>
+            <a href="index.php"><h1><img class="logo" src="img/portalen.png"></h1></a>
             <div class="med-width blue-bg" id="login">
                 <h2>Login Form</h2>
                 <form name="form1" method="post" action="checklogin.php">
