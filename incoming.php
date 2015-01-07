@@ -24,8 +24,6 @@
                         echo '<b>f_key: ' . $tfk . '</b><br />';
 
                         getQs($tfk);
-                        //echo $_SESSION['q_key'][5];
-
 
 
                         for ($j = 0; $j < 10; $j++) {
