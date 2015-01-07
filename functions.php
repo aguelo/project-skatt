@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
     // ----- Random Password function -----
     function randomPassword() {
        $alphabet = "ABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
