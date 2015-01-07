@@ -16,7 +16,7 @@ require('functions.php');
 			</header>
 		</div>
         <div id="main">
-            <h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
+            <h1><a href="login.php"><img class="logo" src="img/portalen.png"></a></h1>
             <div class="small-width blue-bg" id="login">
                 <h2>Login Form</h2>
                 <form name="form1" method="post" action="checklogin.php">

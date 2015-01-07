@@ -23,8 +23,9 @@ require('functions.php');
 		   <div class="med-width grey-bg" id="ny-skatt">
 			   <a href="newforms.php">Nya skattningar! <img src="img/warning.svg"></a>
 		   </div>
+		   <!-- Funktion som gör att notifikation endast syns om en ny skattning är inkommen?-->
 		  <div class="med-width blue-bg" id="send-module">
-			 	
+			 	<h2>Skicka ny skattning</h2>
 				<p>
                <?php
                if (isset($_POST['generate'])) {
@@ -38,7 +39,7 @@ require('functions.php');
                   if(empty($formToSend)) {
                      echo 'Du valde inga formulär att skicka med i skattningen!';
 					 echo '<form method="post" action="index.php">
-					 		<button type="submit">Skicka skattning</button>
+					 		<button type="submit">Tillbaka</button>
 							</form>';
                   }
                   // Om minst ett formulär ifyllt...
@@ -72,7 +73,6 @@ require('functions.php');
                   }
                }
                else {
-				   	echo'<h2>Skicka ny skattning</h2>';
                   	session_start();
                 	firstForm();
                	}

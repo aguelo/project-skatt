@@ -1,15 +1,16 @@
 body{
     background:#fff;
     font-family:Helvetica, Arial, sans-serif;
+	color:#444;
 	margin:0;
 }
 
 p {
-    color:#2b2828;
+    color:#444;
 }
 
 h1 {
-    color:#333;
+    color:#444;
     text-align:center;
 	margin:0 0 2% 0;
 }
@@ -136,7 +137,7 @@ header {
     clear:both;
 }
 
-#send-module input[type=submit], input[type=checkbox]{
+#send-module input[type=submit], #send-module input[type=checkbox]{
     color:#4987c7;
     font-size:16px;
     margin-left: 4%;
@@ -215,5 +216,25 @@ form {
 
 /*Incoming forms*/
 #inkommen {
+	padding:2%;
 	margin-bottom:2%;
+	margin-top:2%;
+}
+
+#inkommen table {
+	width:100%;
+}
+
+#export {
+	background:#4987c7;
+	color:#fff;
+	font-size:16px;
+	cursor:pointer;
+	width:31%;
+	border: 2px solid #fff;
+	border-radius:10px;
+}
+
+#export:hover {
+	background:#61a1e2;
 }
