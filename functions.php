@@ -84,77 +84,84 @@
 
     // ----- Hämta formulär -----
     function getForm($pNumber) {
-       $sqlGetForm  = "SELECT SKATTNING.f_key, FORM.f_name FROM SKATTNING INNER JOIN TEMPLOGIN INNER JOIN FORM ON SKATTNING.t_key = TEMPLOGIN.t_key AND SKATTNING.f_key = FORM.f_key WHERE TEMPLOGIN.p_number = '$pNumber';";
+        $sqlGetForm  = "SELECT SKATTNING.f_key, FORM.f_name FROM SKATTNING INNER JOIN TEMPLOGIN INNER JOIN FORM ON SKATTNING.t_key = TEMPLOGIN.t_key AND SKATTNING.f_key = FORM.f_key WHERE TEMPLOGIN.p_number = '$pNumber';";
 
-       // SQL Error message
-       if ($mysqli = connect_db()) {
-          $result = $mysqli->query($sqlGetForm);
-          print_r($mysqli->error);
-       }
+        // SQL Error message
+        if ($mysqli = connect_db()) {
+           $result = $mysqli->query($sqlGetForm);
+            print_r($mysqli->error);
+        }
 
-       while($myRow = $result->fetch_array()) {
-          $formKeys[] = $myRow['f_key'];
-          $formNames[] = $myRow['f_name'];
-       }
+        while($myRow = $result->fetch_array()) {
+            $formKeys[] = $myRow['f_key'];
+            $formNames[] = $myRow['f_name'];
+        }
 
-       session_start();
-       $_SESSION['form_keys'] = $formKeys;
-       $_SESSION['form_names'] = $formNames;
-       $_SESSION['this_form_key'] = $thisFormKey;
-       $_SESSION['form_count'] = $formCount;
+        session_start();
+        $_SESSION['form_keys'] = $formKeys;
+        $_SESSION['form_names'] = $formNames;
+        $_SESSION['form_count'] = $formCount;
 
-       $formCount = count($formKeys);
-       // Skriv ut de skattningsformulär som patienten ska genomföra
-       for ($i=0; $i < $formCount; $i++) {
-          echo $formKeys[$i] . ' ' . $formNames[$i] . '<br />';
-          echo '<form action="formular-single.php" method="post">';
-          echo '<input type="hidden"name="this_form_key" value="' . ($formKeys[$i] - 1) . '">';
-          echo '<input name="start" type="submit" value="Starta denna skattning">';
-          echo '</form>';
-       }
+        //echo 'key: ' . $formKeys[0] . '/ index: ' . $formIndexes[0] . '<br />';
+        //echo 'key: ' . $formKeys[1] . '/ index: ' . $formIndexes[1] . '<br />';
+        //echo 'key: ' . $formKeys[2] . '/ index: ' . $formIndexes[2] . '<br />';
+        //echo '<br />';
+
+        $formCount = count($formKeys);
+        // Skriv ut de skattningsformulär som patienten ska genomföra
+        $i = 0;
+        while ($i < $formCount) {
+            echo $formKeys[$i] . ' ' . $formNames[$i] . '<br />';
+            echo '<form action="formular-single.php" method="post">';
+            echo '<input type="hidden" name="this_form_index" value="' . ($i) . '">';
+            echo '<input type="hidden" name="this_form_key" value="' . ($formKeys[$i]) . '">';
+            echo '<input name="start" type="submit" value="Starta denna skattning">';
+            echo '</form>';
+            $i++;
+        }
     }
 
     // Hämta alternativ till frågefunktion -----
     function getAlts($fKey, $qKey) {
-       $kk = 0;
-       while ($kk < 4) {
-          $sqlGetAlts = "SELECT ALT.alt_key, ALT.alt_string FROM ALT INNER JOIN FORM INNER JOIN QUESTION ON FORM.f_key = QUESTION.f_key AND QUESTION.q_key = ALT.q_key WHERE FORM.f_key = '$fKey' AND ALT.q_key = '$qKey';";
+        $kk = 0;
+        while ($kk < 4) {
+           $sqlGetAlts = "SELECT ALT.alt_key, ALT.alt_string FROM ALT INNER JOIN FORM INNER JOIN QUESTION ON FORM.f_key = QUESTION.f_key AND QUESTION.q_key = ALT.q_key WHERE FORM.f_key = '$fKey' AND ALT.q_key = '$qKey';";
 
-          // SQL Error message
-          if ($mysqli = connect_db()) {
-             $result = $mysqli->query($sqlGetAlts);
-             print_r($mysqli->error);
-          }
-          while($myRow = $result->fetch_array()) {
-             $altKeys[] = $myRow['alt_key'];
-             $altStrings[] = $myRow['alt_string'];
-          }
-          session_start();
-          $_SESSION['alt_key'] = $altKeys;
-          $_SESSION['alt_string'] = $altStrings;
-          $kk++;
+            // SQL Error message
+            if ($mysqli = connect_db()) {
+              $result = $mysqli->query($sqlGetAlts);
+                print_r($mysqli->error);
+            }
+            while($myRow = $result->fetch_array()) {
+              $altKeys[] = $myRow['alt_key'];
+                $altStrings[] = $myRow['alt_string'];
+            }
+            session_start();
+            $_SESSION['alt_key'] = $altKeys;
+            $_SESSION['alt_string'] = $altStrings;
+            $kk++;
        }
     }
 
     // ----- Hämta formulärfrågor och alternativ -----
     function getQs($key) {
-       $jj = 0;
-       while($jj < 10) {
-          $sqlGetQs  = "SELECT QUESTION.q_key, QUESTION.q_string FROM QUESTION WHERE QUESTION.f_key = '$key';";
+        $jj = 0;
+        while($jj < 10) {
+            $sqlGetQs  = "SELECT QUESTION.q_key, QUESTION.q_string FROM QUESTION WHERE QUESTION.f_key = '$key';";
 
-          // SQL Error message
-          if ($mysqli = connect_db()) {
-             $result = $mysqli->query($sqlGetQs);
-             print_r($mysqli->error);
-          }
-          while($myRow = $result->fetch_array()) {
-             $qKeys[] = $myRow['q_key'];
-             $questions[] = $myRow['q_string'];
-          }
-          session_start();
-          $_SESSION['q_key'] = $qKeys;
-          $_SESSION['q_string'] = $questions;
-          $jj++;
-       }
+            // SQL Error message
+            if ($mysqli = connect_db()) {
+                $result = $mysqli->query($sqlGetQs);
+                print_r($mysqli->error);
+            }
+            while($myRow = $result->fetch_array()) {
+                $qKeys[] = $myRow['q_key'];
+                $questions[] = $myRow['q_string'];
+            }
+            session_start();
+            $_SESSION['q_key'] = $qKeys;
+            $_SESSION['q_string'] = $questions;
+            $jj++;
+        }
     }
 ?>
