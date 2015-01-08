@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['p_number'])) {
+        header('Location: login.php');
+    }
     include('db_connection.php');
     require('functions.php');
 ?>
@@ -11,58 +15,56 @@
         <title>Webbskattningsportalen</title>
     </head>
     <body>
+		<div class="header-bg">
+			<header>
+			</header>
+		</div>
+		<h1><a href="formular.php"><img class="logo" src="img/portalen.png"></a></h1>
         <div class="main">
-            <div class="container">
-                <h2>Heading!</h2>
+            <div class="med-width" id="single-form">
                 <p>
                 <?php
+                    if (isset($_POST['start'])) {
+                        session_start();
+                        $thisFormKey = $_POST['this_form_key'];
+                        $thisFormIndex = $_POST['this_form_index'];
+                        $sKeys = $_POST['this_s_key'];
 
-                if (isset($_POST['start'])) {
-                    session_start();
-                    $thisFormKey = $_POST['this_form_key'];
-                    $thisFormIndex = $_POST['this_form_index'];
-                    $sKeys = $_POST['this_s_key'];
+    					echo '<a href="formular.php">Tillbaka</a>';
 
-                    echo 'index: ' . $thisFormIndex;
-                    echo '<br />';
-                    echo 'key: ' . $thisFormKey;
-                    echo '<br />';
-                    echo 's_key: ' . $sKeys;
-                    echo '<br />';
+                        $i = $thisFormIndex;
+                        $j = 0;
+                        echo '<h3>' . $_SESSION['form_names'][$i] . ' </h3><br />';
+                        echo '<form action="incoming.php" method="post">';
+                        // Loopa frågor
+                        while ($j < 10) {
+                            getQs($_SESSION['form_keys'][$i]);
 
-                    $i = $thisFormIndex;
-                    $j = 0;
-                    echo '<h3>' . $_SESSION['form_names'][$i] . ' </h3><br />';
-                    echo '<form action="incoming.php" method="post">';
-                    // Loopa frågor
-                    while ($j < 10) {
+                            // Rubrik
+                            echo '<h4>' . $_SESSION['q_string'][$j] . '</h4>';
+                            echo '<br />';
 
-                        getQs($_SESSION['form_keys'][$i]);
+                            // Hämta alternativ
+                            getAlts($_SESSION['form_keys'][$i],$_SESSION['q_key'][$j]);
+                            for ($m=0; $m < 4; $m++) {
 
-                        // Rubrik
-                        echo '<h4>' . $_SESSION['q_string'][$j] . '</h4>';
-                        echo '<br />';
-
-                        // Hämta alternativ
-                        getAlts($_SESSION['form_keys'][$i],$_SESSION['q_key'][$j]);
-                        for ($m=0; $m < 4; $m++) {
-
-                            echo '<input type="radio" name="' . $_SESSION['q_key'][$j] . '" value="' . $_SESSION['alt_key'][$m] . '" ><label for="' . $_SESSION['q_key'][$j] . '">' . $_SESSION['alt_string'][$m] . ' </label>';
+                                echo '<input type="radio" name="' . $_SESSION['q_key'][$j] . '" value="' . $_SESSION['alt_key'][$m] . '" ><label for="' . $_SESSION['q_key'][$j] . '">' . $_SESSION['alt_string'][$m] . ' </label><br />';
+                            }
+                            $j++;
                         }
-                        $j++;
+                        echo '<input type="hidden" name="this_s_key" value="' . ($sKeys) . '">';
+                        echo '<input type="hidden" name="this_form_index" value="' . ($thisFormIndex) . '">';
+                        echo '<input type="hidden" name="this_form_key" value="' . ($thisFormKey) . '">';
+                        echo '<input type="submit" name="skicka" value="Skicka skattning">';
+                        echo '</form>';
                     }
-                    echo '<input type="hidden" name="this_s_key" value="' . ($sKeys) . '">';
-                    echo '<input type="hidden" name="this_form_index" value="' . ($thisFormIndex) . '">';
-                    echo '<input type="hidden" name="this_form_key" value="' . ($thisFormKey) . '">';
-                    echo '<input type="submit" name="skicka" value="Skicka skattning">';
-                    echo '</form>';
-                }
                 ?>
                 </p>
             </div>
         </div>
     </body>
-<footer>
-   <p>Skapad av oss</p>
-</footer>
+    <footer>
+       <p>Skapad av oss</p>
+    	<a href="logout.php">Logga ut</a>
+    </footer>
 </html>

@@ -22,7 +22,6 @@
 		   </div>
 		   <!-- Funktion som gör att notifikation endast syns om en ny skattning är inkommen?-->
 		  <div class="med-width blue-bg" id="send-module">
-              <h2>Skicka ny skattning</h2>
               <p>
                   <?php
                        if (isset($_POST['generate'])) {
@@ -35,9 +34,7 @@
                           // ...och minst ett formulär valt
                           if(empty($formToSend)) {
                         	echo "Du valde inga formulär att skicka med i skattningen!";
-				echo '<form method="post" action="index.php">
-					<button type="submit">Tillbaka</button>
-					</form>';
+				            echo '<form method="post" action="index.php"><button type="submit">Tillbaka</button></form>';
                           }
                           // Om minst ett formulär ifyllt...
                           else {
@@ -70,6 +67,7 @@
                           }
                        }
                        else {
+						   	echo '<h2>Skicka ny skattning</h2>';
                           	session_start();
                         	firstForm();
                        }

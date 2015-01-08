@@ -114,38 +114,46 @@
 
         // Skriv ut de skattningsformulär som patienten ska genomföra
 
-            $i = 0;
-            $h = 0;
-            while ($i < $formCount) {
-                echo $formKeys[$i] . ' ' . $formNames[$i];
-                //$check = 0;
-                $sqlCheckAnswer = "SELECT s_key FROM ANSWER WHERE (s_key) = '$sKeys[$i]' LIMIT 1;";
-                // SQL Error message
-                if ($mysqli = connect_db()) {
-                    $result = $mysqli->query($sqlCheckAnswer);
-                    print_r($mysqli->error);
-                    $check = mysqli_num_rows($result);
-                }
-
-                if ($check == 0) {
-                    echo '<form action="formular-single.php" method="post">';
-                    echo '<input type="hidden" name="this_s_key" value="' . ($sKeys[$i]) . '">';
-                    echo '<input type="hidden" name="this_form_index" value="' . ($i) . '">';
-                    echo '<input type="hidden" name="this_form_key" value="' . ($formKeys[$i]) . '">';
-                    echo '<input name="start" type="submit" value="Starta denna skattning">';
-                    echo '</form>';
-                }
-                else {
-                    echo 'Klar ';
-                    $h++;
-                }
-                $i++;
-            }
-            if ($h == $formCount) {
-                echo 'Tack! Du har nu fyllt i alla formulär.';
-                echo '<a href="send-answers.php">Stäng fönstret</a>';
+        $i = 0;
+        $h = 0;
+        
+        while ($i < $formCount) {
+            echo '<table>';
+            echo '<tr><td>';
+            echo $formKeys[$i] . ' ' . $formNames[$i];
+            //$check = 0;
+            $sqlCheckAnswer = "SELECT s_key FROM ANSWER WHERE (s_key) = '$sKeys[$i]' LIMIT 1;";
+            // SQL Error message
+            if ($mysqli = connect_db()) {
+                $result = $mysqli->query($sqlCheckAnswer);
+                print_r($mysqli->error);
+                $check = mysqli_num_rows($result);
             }
 
+            if ($check == 0) {
+                echo '<form action="formular-single.php" method="post">';
+                echo '<input type="hidden" name="this_s_key" value="' . ($sKeys[$i]) . '">';
+                echo '<input type="hidden" name="this_form_index" value="' . ($i) . '">';
+                echo '<input type="hidden" name="this_form_key" value="' . ($formKeys[$i]) . '">';
+                echo '</td><td align="right">';
+                echo '<input name="start" type="submit" value="Starta denna skattning">';
+                echo '</form>';
+
+            }
+            else {
+                echo '</td><td align="right">';
+                echo 'Klar ';
+                $h++;
+            }
+            echo '</td></tr>';
+            echo '</table>';
+            echo '<br />';
+            $i++;
+        }
+        if ($h == $formCount) {
+            echo 'Tack! Du har nu fyllt i alla formulär.<br />';
+            echo '<a href="send-answers.php">Stäng fönstret</a>';
+        }
     }
 
     // Hämta alternativ till frågefunktion -----
