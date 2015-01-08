@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Dec 19, 2014 at 11:11 AM
+-- Generation Time: Jan 08, 2015 at 10:10 AM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -165,8 +165,9 @@ CREATE TABLE `ANSWER` (
   `ans_key` int(11) NOT NULL AUTO_INCREMENT,
   `alt_key` int(11) NOT NULL COMMENT 'Foreign key',
   `s_key` int(11) NOT NULL COMMENT 'Foreign key',
+  `q_key` int(11) NOT NULL COMMENT 'Foreign key',
   UNIQUE KEY `ans_key` (`ans_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -300,7 +301,7 @@ CREATE TABLE `SKATTNING` (
   `t_key` int(11) NOT NULL COMMENT 'Foreign key',
   `s_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY `s_key` (`s_key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=202 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=212 ;
 
 -- --------------------------------------------------------
 
@@ -313,7 +314,7 @@ CREATE TABLE `TEMPLOGIN` (
   `p_number` varchar(10) NOT NULL COMMENT 'Foreign key',
   `p_pass` varchar(6) NOT NULL,
   UNIQUE KEY `t_key` (`t_key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=193 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=199 ;
 
 -- --------------------------------------------------------
 

@@ -20,13 +20,23 @@
                         session_start();
                         $tfk = $_POST['this_form_key'];
                         $tfi = $_POST['this_form_index'];
+                        $tsk = $_POST['this_s_key'];
+
                         echo '<b>f_index: ' . $tfi . '</b><br />';
                         echo '<b>f_key: ' . $tfk . '</b><br />';
+                        echo '<b>s_key: ' . $tsk . '</b><br />';
 
-                        for ($j = ($tfi); $j < 31; $j++) {
-                            echo $_SESSION['q_key'][$j];
-                            $answer = $_POST[$j];
-                            echo 'alt_key =' . $answer;
+                        getQs($tfk);
+
+                        for ($j = 0; $j < 10; $j++) {
+                            echo 'Fråga nr: ' . $_SESSION['q_key'][$j] . ' / ';
+                            $counter = $_SESSION['q_key'][$j];
+                            $maxCount = ($counter+10);
+                            while ($counter < $maxCount) {
+                                $answers[] = $_POST[$counter];
+                                $counter++;
+                            }
+                            echo 'alt_key =' . $answers[$j];
                             echo '<br />';
                         }
                     }
