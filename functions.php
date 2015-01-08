@@ -115,13 +115,19 @@
         // Skriv ut de skattningsformulär som patienten ska genomföra
         $i = 0;
         while ($i < $formCount) {
-            echo $formKeys[$i] . ' ' . $formNames[$i] . '<br />';
+			echo '<table>';
+			echo '<tr><td>';
+            echo $formKeys[$i] . ' ' . $formNames[$i];
             echo '<form action="formular-single.php" method="post">';
             echo '<input type="hidden" name="this_s_key" value="' . ($sKeys[$i]) . '">';
             echo '<input type="hidden" name="this_form_index" value="' . ($i) . '">';
             echo '<input type="hidden" name="this_form_key" value="' . ($formKeys[$i]) . '">';
+			echo '</td><td align="right">';
             echo '<input name="start" type="submit" value="Starta denna skattning">';
             echo '</form>';
+			echo '</td></tr>';
+			echo '</table>';
+			echo '<br />';
             $i++;
         }
     }

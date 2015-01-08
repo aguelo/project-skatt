@@ -183,7 +183,7 @@ header {
 }
 
 /*Login*/
-form {
+#login form {
 	display: block;
 }
 
@@ -244,6 +244,14 @@ form {
 }
 
 /*List of forms for patient*/
+#formular p {
+	margin-bottom: 40px;
+}
+
+#formular form {
+	display:inline;
+}
+
 #formular input[type=submit] {
 	background:#4987c7;
 	color:#fff;
@@ -251,9 +259,15 @@ form {
 	cursor:pointer;
 	border:2px solid #fff;
 	border-radius:10px;
-	padding:1%;
+	padding:5px;
 }
 
 #formular input[type=submit]:hover {
 	background-color:#61a1e2;
+}
+
+#formular table {
+	width:100%;
+	border-bottom: 1px solid #ccc;
+	padding:1%;
 }
