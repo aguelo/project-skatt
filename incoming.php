@@ -30,6 +30,7 @@
 
                         for ($j = 0; $j < 10; $j++) {
                             echo 'Fråga nr: ' . $_SESSION['q_key'][$j] . ' / ';
+
                             $counter = $_SESSION['q_key'][$j];
                             $maxCount = ($counter+10);
                             while ($counter < $maxCount) {
@@ -38,6 +39,7 @@
                             }
                             echo 'alt_key =' . $answers[$j];
                             echo '<br />';
+                            sendAnswer($answers[$j], $tsk, $_SESSION['q_key'][$j]);
                         }
                     }
                 ?>

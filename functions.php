@@ -168,7 +168,14 @@
     }
 
     // ----- Skicka svar till databasen -----
-    function sendAnswers($altKey) {
-        // INSERT INTO `ANSWER` (`alt_key`, `s_key`, `q_key`) VALUES ('81', '211', '21');
+    function sendAnswer($altKey, $sKey, $qKey) {
+
+        $sqlSendAnswer = "INSERT INTO `ANSWER` (`alt_key`, `s_key`, `q_key`) VALUES ('$altKey', '$sKey', '$qKey');";
+
+        // SQL Error message
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlSendAnswer);
+            print_r($mysqli->error);
+        }
     }
 ?>
