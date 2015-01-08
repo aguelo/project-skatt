@@ -55,7 +55,11 @@
                                 $tKey = getTkey($patientToSendTo);
 
                             // Skicka till SKATTNING
-                                
+                            $n = count($formToSend);
+                            for ($i=0; $i < $n; $i++) {
+                                $sqlSkattning = "INSERT INTO SKATTNING (f_key, t_key) VALUES ('$formToSend[$i]', '$tKey[0]');";
+                                $mysqli->query($sqlSkattning);
+                            }
 
                             // Skicka E-post
                                 $array = getEmailPass($tKey[0]);
