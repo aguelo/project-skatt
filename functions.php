@@ -87,7 +87,7 @@
 
     // ----- Hämta formulär -----
     function getForm($pNumber) {
-        $sqlGetForm  = "SELECT SKATTNING.f_key, FORM.f_name FROM SKATTNING INNER JOIN TEMPLOGIN INNER JOIN FORM ON SKATTNING.t_key = TEMPLOGIN.t_key AND SKATTNING.f_key = FORM.f_key WHERE TEMPLOGIN.p_number = '$pNumber';";
+        $sqlGetForm  = "SELECT SKATTNING.f_key, SKATTNING.s_key, FORM.f_name FROM SKATTNING INNER JOIN TEMPLOGIN INNER JOIN FORM ON SKATTNING.t_key = TEMPLOGIN.t_key AND SKATTNING.f_key = FORM.f_key WHERE TEMPLOGIN.p_number = '$pNumber';";
 
         // SQL Error message
         if ($mysqli = connect_db()) {
@@ -98,28 +98,36 @@
         while($myRow = $result->fetch_array()) {
             $formKeys[] = $myRow['f_key'];
             $formNames[] = $myRow['f_name'];
+            $sKeys[] = $myRow['s_key'];
         }
 
         session_start();
         $_SESSION['form_keys'] = $formKeys;
         $_SESSION['form_names'] = $formNames;
+
+        // s_key sessionsvariabel
+        $_SESSION['s_key'] = $sKeys;
+
+        // Counter för # formulär
+        $formCount = count($formKeys);
         $_SESSION['form_count'] = $formCount;
 
-        //echo 'key: ' . $formKeys[0] . '/ index: ' . $formIndexes[0] . '<br />';
-        //echo 'key: ' . $formKeys[1] . '/ index: ' . $formIndexes[1] . '<br />';
-        //echo 'key: ' . $formKeys[2] . '/ index: ' . $formIndexes[2] . '<br />';
-        //echo '<br />';
-
-        $formCount = count($formKeys);
         // Skriv ut de skattningsformulär som patienten ska genomföra
         $i = 0;
         while ($i < $formCount) {
-            echo $formKeys[$i] . ' ' . $formNames[$i] . '<br />';
+			echo '<table>';
+			echo '<tr><td>';
+            echo $formKeys[$i] . ' ' . $formNames[$i];
             echo '<form action="formular-single.php" method="post">';
+            echo '<input type="hidden" name="this_s_key" value="' . ($sKeys[$i]) . '">';
             echo '<input type="hidden" name="this_form_index" value="' . ($i) . '">';
             echo '<input type="hidden" name="this_form_key" value="' . ($formKeys[$i]) . '">';
+			echo '</td><td align="right">';
             echo '<input name="start" type="submit" value="Starta denna skattning">';
             echo '</form>';
+			echo '</td></tr>';
+			echo '</table>';
+			echo '<br />';
             $i++;
         }
     }
@@ -166,5 +174,10 @@
             $_SESSION['q_string'] = $questions;
             $jj++;
         }
+    }
+
+    // ----- Skicka svar till databasen -----
+    function sendAnswers($altKey) {
+        // INSERT INTO `ANSWER` (`alt_key`, `s_key`, `q_key`) VALUES ('81', '211', '21');
     }
 ?>

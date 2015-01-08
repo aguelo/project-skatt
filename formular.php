@@ -15,15 +15,20 @@
        <title>Webbskattningsportalen</title>
     </head>
     <body>
+		<div class="header-bg">
+			<header>
+			</header>
+		</div>
        <div class="main">
-          <div class="container">
-             <h2>Heading!</h2>
-             <p>
+		   <h1><a href="formular.php"><img class="logo" src="img/portalen.png"></a></h1>
+          <div class="med-width" id="formular">
+             <h2>Välkommen!</h2>
+             
                 <?php
-                    echo 'Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. <br />';
+                    echo '<p>Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. </p>';
                     getForm($_SESSION['p_number']);
                 ?>
-             </p>
+             
           </div>
        </div>
     </body>
