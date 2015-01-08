@@ -11,31 +11,18 @@
        return implode($pass); //turn the array into a string
     }
 
-    // ----- Send module - Index-formuläret -----
-    function firstForm() {
-       echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
-       echo '<label for="patient_number">Personnummer: </label>';
-       echo '<input name="patient_number" type="text">';
-       echo '<label for="patient_firstname">Förnamn: </label>';
-       echo '<input name="patient_firstname" type="text">';
-       echo '<label for="patient_lastname">Efternamn: </label>';
-       echo '<input name="patient_lastname" type="text">';
-       echo '<label for="patient_email">Epostadress: </label>';
-       echo '<input name="patient_email" type="text">';
+    // ----- Create new TEMPLOGIN -----
+    function createTemplogin($pNum) {
 
-       $sqlForms = "SELECT f_key, f_code, f_name FROM FORM;";
-
-       if ($mysqli = connect_db()) {
-          $result = $mysqli->query($sqlForms);
-          print_r($mysqli->error);
-       }
-    	echo '<br />';
-       while($myRow = $result->fetch_array()) {
-          echo '<input name="form[ ]" type="checkbox" value="' . $myRow['f_key'] . '">';
-          echo $myRow['f_code'] . ' / ' . $myRow['f_name'] . '<br />';
-       }
-       echo '<input name="generate" type="submit" value="Skicka skattning">';
-       echo '</form>';
+        // DBconnection + query + SQL Error message
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlSend);
+            print_r($mysqli->error);
+        }
+        // Skicka till TEMPLOGIN
+        $randPass = '123456';
+        $sqlTemp  = "INSERT INTO TEMPLOGIN (p_number, p_pass) VALUES ('$pNum', '$randPass');";
+        $mysqli->query($sqlTemp);
     }
 
     // ----- Get t_key ------
@@ -49,6 +36,11 @@
        $data = $result->fetch_array(MYSQLI_NUM);
        return $data;
        $mysqli->close();
+    }
+
+    // ----- send to SKATTNING -----
+    function sendSkattning() {
+
     }
 
     // ----- getEmailPass function -----
@@ -116,7 +108,7 @@
 
         $i = 0;
         $h = 0;
-        
+
         while ($i < $formCount) {
             echo '<table>';
             echo '<tr><td>';
