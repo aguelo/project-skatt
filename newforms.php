@@ -12,7 +12,8 @@
 			</header>
 		</div>
 		<h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
-		<div class="med-width">
+		<div class="med-width" id="new-forms">
+			<a href="index.php">Tillbaka</a>
 			<table>
 				<tr>
 					<td>

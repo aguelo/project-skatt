@@ -11,9 +11,13 @@
         <title>Webbskattningsportalen</title>
     </head>
     <body>
+		<div class="header-bg">
+			<header>
+			</header>
+		</div>
+		<h1><a href="formular.php"><img class="logo" src="img/portalen.png"></a></h1>
         <div class="main">
-            <div class="container">
-                <h2>Heading!</h2>
+            <div class="med-width" id="single-form">
                 <p>
                 <?php
 
@@ -22,21 +26,21 @@
                     $thisFormKey = $_POST['this_form_key'];
                     $thisFormIndex = $_POST['this_form_index'];
                     $sKeys = $_POST['this_s_key'];
-
-                    echo 'index: ' . $thisFormIndex;
+					
+                  /*echo 'index: ' . $thisFormIndex;
                     echo '<br />';
                     echo 'key: ' . $thisFormKey;
                     echo '<br />';
                     echo 's_key: ' . $sKeys;
-                    echo '<br />';
-
+                    echo '<br />';*/
+					echo '<a href="formular.php">Tillbaka</a>';
+					
                     $i = $thisFormIndex;
                     $j = 0;
                     echo '<h3>' . $_SESSION['form_names'][$i] . ' </h3><br />';
                     echo '<form action="incoming.php" method="post">';
                     // Loopa frågor
                     while ($j < 10) {
-
                         getQs($_SESSION['form_keys'][$i]);
 
                         // Rubrik
@@ -47,7 +51,7 @@
                         getAlts($_SESSION['form_keys'][$i],$_SESSION['q_key'][$j]);
                         for ($m=0; $m < 4; $m++) {
 
-                            echo '<input type="radio" name="' . $_SESSION['q_key'][$j] . '" value="' . $_SESSION['alt_key'][$m] . '" ><label for="' . $_SESSION['q_key'][$j] . '">' . $_SESSION['alt_string'][$m] . ' </label>';
+                            echo '<input type="radio" name="' . $_SESSION['q_key'][$j] . '" value="' . $_SESSION['alt_key'][$m] . '" ><label for="' . $_SESSION['q_key'][$j] . '">' . $_SESSION['alt_string'][$m] . ' </label><br />';
                         }
                         $j++;
                     }
@@ -64,5 +68,6 @@
     </body>
 <footer>
    <p>Skapad av oss</p>
+	<a href="logout.php">Logga ut</a>
 </footer>
 </html>

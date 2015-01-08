@@ -9,7 +9,7 @@ p {
     color:#444;
 }
 
-h1 {
+h1{
     color:#444;
     text-align:center;
 	margin:0 0 2% 0;
@@ -19,6 +19,15 @@ h2{
     color:#444;
     text-align:center;
 	margin:5px;
+}
+
+h3 {
+	margin:0;
+}
+
+h4 {
+	margin:0;
+	margin-top:50px;
 }
 
 a {
@@ -224,6 +233,14 @@ header {
 }
 
 /*Incoming forms*/
+#new-forms a {
+	display:block;
+	text-align:center;
+	padding:5px;
+	margin-bottom:20px;
+	border-bottom:1px solid #ccc;
+}
+
 #inkommen {
 	padding:2%;
 	margin-bottom:2%;
@@ -274,4 +291,37 @@ header {
 	width:100%;
 	border-bottom: 1px solid #ccc;
 	padding:1%;
+}
+
+/*Single form for patient*/
+#single-form h4 {
+	margin-top:20px;
+}
+
+#single-form input[type=radio] {
+	margin:5px;
+}
+
+#single-form input[type=submit] {
+	background:#4987c7;
+	color:#fff;
+	font-size:15px;
+	cursor:pointer;
+	border:2px solid #fff;
+	border-radius:10px;
+	padding:5px;
+	margin-top:40px;
+	width:30%;
+}
+
+#single-form input[type=submit]:hover {
+	background-color:#61a1e2;
+}
+
+#single-form a {
+	display:block;
+	text-align:center;
+	padding:5px;
+	margin-bottom:20px;
+	border-bottom:1px solid #ccc;
 }
