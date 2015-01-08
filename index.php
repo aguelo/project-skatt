@@ -37,7 +37,7 @@
                         	echo "Du valde inga formulär att skicka med i skattningen!";
 				echo '<form method="post" action="index.php">
 					<button type="submit">Tillbaka</button>
-					</form>'; 
+					</form>';
                           }
                           // Om minst ett formulär ifyllt...
                           else {

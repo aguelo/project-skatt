@@ -115,13 +115,24 @@
         // Skriv ut de skattningsformulär som patienten ska genomföra
         $i = 0;
         while ($i < $formCount) {
-            echo $formKeys[$i] . ' ' . $formNames[$i] . '<br />';
-            echo '<form action="formular-single.php" method="post">';
-            echo '<input type="hidden" name="this_s_key" value="' . ($sKeys[$i]) . '">';
-            echo '<input type="hidden" name="this_form_index" value="' . ($i) . '">';
-            echo '<input type="hidden" name="this_form_key" value="' . ($formKeys[$i]) . '">';
-            echo '<input name="start" type="submit" value="Starta denna skattning">';
-            echo '</form>';
+            echo $formKeys[$i] . ' ' . $formNames[$i];
+            //$check = 0;
+            $sqlCheckAnswer = "SELECT s_key FROM ANSWER WHERE (s_key) = '$sKeys[$i]' LIMIT 1;";
+            // SQL Error message
+            if ($mysqli = connect_db()) {
+                $result = $mysqli->query($sqlCheckAnswer);
+                print_r($mysqli->error);
+                $check = mysqli_num_rows($result);
+            }
+
+            if ($check == 0) {
+                echo '<form action="formular-single.php" method="post">';
+                echo '<input type="hidden" name="this_s_key" value="' . ($sKeys[$i]) . '">';
+                echo '<input type="hidden" name="this_form_index" value="' . ($i) . '">';
+                echo '<input type="hidden" name="this_form_key" value="' . ($formKeys[$i]) . '">';
+                echo '<input name="start" type="submit" value="Starta denna skattning">';
+                echo '</form>';
+            } else {echo 'Klar';};
             $i++;
         }
     }
