@@ -22,7 +22,6 @@
 		   </div>
 		   <!-- Funktion som gör att notifikation endast syns om en ny skattning är inkommen?-->
 		  <div class="med-width blue-bg" id="send-module">
-              <h2>Skicka ny skattning</h2>
               <p>
                   <?php
                        if (isset($_POST['generate'])) {
@@ -70,6 +69,7 @@
                           }
                        }
                        else {
+						   	echo '<h2>Skicka ny skattning</h2>';
                           	session_start();
                         	firstForm();
                        }

@@ -20,7 +20,7 @@
 			</header>
 		</div>
        <div class="main">
-		   <h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
+		   <h1><a href="formular.php"><img class="logo" src="img/portalen.png"></a></h1>
           <div class="med-width" id="formular">
              <h2>Välkommen!</h2>
              

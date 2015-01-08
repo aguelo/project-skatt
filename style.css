@@ -26,10 +26,15 @@ a {
 	text-decoration:none;
 }
 
+a:hover {
+	color:#61a1e2;
+}
+
 footer {
     font-size:small;
     text-align: center;
-    margin-top:5%;
+    margin-top:1%;
+	padding:2%;
 }
 
 /*Banner*/
@@ -234,7 +239,6 @@ header {
 	color:#fff;
 	font-size:16px;
 	cursor:pointer;
-	width:31%;
 	border: 2px solid #fff;
 	border-radius:10px;
 }

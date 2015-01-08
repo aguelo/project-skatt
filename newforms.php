@@ -13,12 +13,20 @@
 		</div>
 		<h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
 		<div class="med-width">
-			<!-- Skicka till journal-knapp. Behöver funktion?-->
-			<button id="export">Skicka till journal</button>
-			<!-- Markera alla skattningar, Behöver funktion?-->
-			Markera alla:
-			<input type="checkbox" name="markall" value="Markera alla">
-			
+			<table>
+				<tr>
+					<td>
+						<!-- Markera alla skattningar, Behöver funktion?-->
+						Markera alla: <input type="checkbox" name="markall" value="Markera alla">
+					</td>	
+				</tr>
+				<tr>
+					<td>
+						<!-- Skicka till journal-knapp. Behöver funktion?-->
+						<button id="export">Skicka till journal</button>
+					</td>	
+				</tr>	
+			</table>	
 			<!-- Loop som hämtar varje skattning till tabell nedan? -->
 			<div class="grey-bg" id="inkommen">
 				<table>
@@ -46,7 +54,8 @@
 				</table>
 			</div>
 		</div>	
-			
-		
 	</body>
+	<footer>
+        <p>Skapad av oss</p>
+    </footer>
 </html>
