@@ -18,7 +18,7 @@
         <div id="main">
             <h1><a href="login.php"><img class="logo" src="img/portalen.png"></a></h1>
             <div class="small-width blue-bg" id="login">
-                <h2>Login Form</h2>
+                <h2>Logga in</h2>
                 <form name="form1" method="post" action="checklogin.php">
                     <label>UserName :</label>
                     <input id="name" name="username" placeholder="username" type="text">
