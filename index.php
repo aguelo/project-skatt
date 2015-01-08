@@ -18,8 +18,9 @@
 	   <div class="main">
 		   <h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
 		   <div class="med-width grey-bg" id="ny-skatt">
-			   <a href="incoming.php">Nya skattningar! <img src="img/warning.svg"></a>
+			   <a href="newforms.php">Nya skattningar! <img src="img/warning.svg"></a>
 		   </div>
+		   <!-- Funktion som gör att notifikation endast syns om en ny skattning är inkommen?-->
 		  <div class="med-width blue-bg" id="send-module">
               <h2>Skicka ny skattning</h2>
               <p>
@@ -33,7 +34,10 @@
                           // Om knapp är tryckt
                           // ...och minst ett formulär valt
                           if(empty($formToSend)) {
-                             echo "Du valde inga formulär att skicka med i skattningen!";
+                        	echo "Du valde inga formulär att skicka med i skattningen!";
+				echo '<form method="post" action="index.php">
+					<button type="submit">Tillbaka</button>
+					</form>'; 
                           }
                           // Om minst ett formulär ifyllt...
                           else {
