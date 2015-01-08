@@ -8,6 +8,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+    jQuery(document).ready(function($){
+        $('#personnummer').autocomplete({source:'suggest.php', minLength:2});
+    });
+    </script>
     <title>Webbskattningsportalen</title>
 </head>
 	<body>
@@ -70,18 +76,21 @@
                         }
                     // Om EJ skattning skickad (Start)
                         else {
-                            echo '<h2>Skicka ny skattning</h2>';
-                            session_start();
-                            echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
-                            echo '<label for="patient_number">Personnummer: </label>';
-                            echo '<input name="patient_number" type="text">';
-                            echo '<label for="patient_firstname">Förnamn: </label>';
-                            echo '<input name="patient_firstname" type="text">';
-                            echo '<label for="patient_lastname">Efternamn: </label>';
-                            echo '<input name="patient_lastname" type="text">';
-                            echo '<label for="patient_email">Epostadress: </label>';
-                            echo '<input name="patient_email" type="text">';
+                                session_start();
+                            ?>
 
+                            <h2>Skicka ny skattning</h2>
+                            <form action="" method="post">
+                            <label for="patient_number">Personnummer: </label>
+                            <input name="patient_number" type="text" id="personnummer">
+                            <label for="patient_firstname">Förnamn: </label>
+                            <input name="patient_firstname" type="text">
+                            <label for="patient_lastname">Efternamn: </label>
+                            <input name="patient_lastname" type="text">
+                            <label for="patient_email">Epostadress: </label>
+                            <input name="patient_email" type="text">
+
+                            <?php
                             $sqlForms = "SELECT f_key, f_code, f_name FROM FORM;";
 
                             if ($mysqli = connect_db()) {
