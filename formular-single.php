@@ -20,13 +20,14 @@
                 if (isset($_POST['start'])) {
                     session_start();
                     $thisFormKey = $_POST['this_form_key'];
-                    //$_SESSION['this_form_key'] = $thisFormKey;
                     $thisFormIndex = $_POST['this_form_index'];
-                    //$_SESSION['this_form_index'] = $thisFormIndex;
+                    $sKeys = $_POST['this_s_key'];
 
                     echo 'index: ' . $thisFormIndex;
                     echo '<br />';
                     echo 'key: ' . $thisFormKey;
+                    echo '<br />';
+                    echo 's_key: ' . $sKeys;
                     echo '<br />';
 
                     $i = $thisFormIndex;
@@ -50,6 +51,7 @@
                         }
                         $j++;
                     }
+                    echo '<input type="hidden" name="this_s_key" value="' . ($sKeys) . '">';
                     echo '<input type="hidden" name="this_form_index" value="' . ($thisFormIndex) . '">';
                     echo '<input type="hidden" name="this_form_key" value="' . ($thisFormKey) . '">';
                     echo '<input type="submit" name="skicka" value="Skicka skattning">';

@@ -20,11 +20,13 @@
                         session_start();
                         $tfk = $_POST['this_form_key'];
                         $tfi = $_POST['this_form_index'];
+                        $tsk = $_POST['this_s_key'];
+
                         echo '<b>f_index: ' . $tfi . '</b><br />';
                         echo '<b>f_key: ' . $tfk . '</b><br />';
+                        echo '<b>s_key: ' . $tsk . '</b><br />';
 
                         getQs($tfk);
-
 
                         for ($j = 0; $j < 10; $j++) {
                             echo 'Fråga nr: ' . $_SESSION['q_key'][$j] . ' / ';
