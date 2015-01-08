@@ -1,51 +1,26 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['p_number'])) {
+        header('Location: login.php');
+    }
     include('db_connection.php');
     require('functions.php');
+
+    if (isset($_POST['skicka'])) {
+        session_start();
+        $tfk = $_POST['this_form_key'];
+        $tfi = $_POST['this_form_index'];
+        $tsk = $_POST['this_s_key'];
+        getQs($tfk);
+        for ($j = 0; $j < 10; $j++) {
+            $counter = $_SESSION['q_key'][$j];
+            $maxCount = ($counter+10);
+            while ($counter < $maxCount) {
+                $answers[] = $_POST[$counter];
+                $counter++;
+            }
+            sendAnswer($answers[$j], $tsk, $_SESSION['q_key'][$j]);
+        }
+    }
+    header('Location: formular.php')
 ?>
-<!DOCTYPE html PUBLIC "-//w3c//DTD XHTMLm 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmnlns="http://www.w3.org/1999/xhtml" xml:lang="sv" lang="sv">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <title>Webbskattningsportalen</title>
-    </head>
-    <body>
-        <div class="main">
-           <div class="container">
-               <h2>Heading!</h2>
-               <p>
-                <?php
-                    if (isset($_POST['skicka'])) {
-                        session_start();
-                        $tfk = $_POST['this_form_key'];
-                        $tfi = $_POST['this_form_index'];
-                        $tsk = $_POST['this_s_key'];
-
-                        echo '<b>f_index: ' . $tfi . '</b><br />';
-                        echo '<b>f_key: ' . $tfk . '</b><br />';
-                        echo '<b>s_key: ' . $tsk . '</b><br />';
-
-                        getQs($tfk);
-
-                        for ($j = 0; $j < 10; $j++) {
-                            echo 'Fråga nr: ' . $_SESSION['q_key'][$j] . ' / ';
-                            $counter = $_SESSION['q_key'][$j];
-                            $maxCount = ($counter+10);
-                            while ($counter < $maxCount) {
-                                $answers[] = $_POST[$counter];
-                                $counter++;
-                            }
-                            echo 'alt_key =' . $answers[$j];
-                            echo '<br />';
-                        }
-                    }
-                ?>
-                </p>
-            </div>
-        </div>
-    </body>
-    <footer>
-       <p>Skapad av oss</p>
-    </footer>
-</html>

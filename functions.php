@@ -113,22 +113,46 @@
         $_SESSION['form_count'] = $formCount;
 
         // Skriv ut de skattningsformulär som patienten ska genomföra
+
         $i = 0;
+        $h = 0;
+        
         while ($i < $formCount) {
-			echo '<table>';
-			echo '<tr><td>';
+            echo '<table>';
+            echo '<tr><td>';
             echo $formKeys[$i] . ' ' . $formNames[$i];
-            echo '<form action="formular-single.php" method="post">';
-            echo '<input type="hidden" name="this_s_key" value="' . ($sKeys[$i]) . '">';
-            echo '<input type="hidden" name="this_form_index" value="' . ($i) . '">';
-            echo '<input type="hidden" name="this_form_key" value="' . ($formKeys[$i]) . '">';
-			echo '</td><td align="right">';
-            echo '<input name="start" type="submit" value="Starta denna skattning">';
-            echo '</form>';
-			echo '</td></tr>';
-			echo '</table>';
-			echo '<br />';
+            //$check = 0;
+            $sqlCheckAnswer = "SELECT s_key FROM ANSWER WHERE (s_key) = '$sKeys[$i]' LIMIT 1;";
+            // SQL Error message
+            if ($mysqli = connect_db()) {
+                $result = $mysqli->query($sqlCheckAnswer);
+                print_r($mysqli->error);
+                $check = mysqli_num_rows($result);
+            }
+
+            if ($check == 0) {
+                echo '<form action="formular-single.php" method="post">';
+                echo '<input type="hidden" name="this_s_key" value="' . ($sKeys[$i]) . '">';
+                echo '<input type="hidden" name="this_form_index" value="' . ($i) . '">';
+                echo '<input type="hidden" name="this_form_key" value="' . ($formKeys[$i]) . '">';
+                echo '</td><td align="right">';
+                echo '<input name="start" type="submit" value="Starta denna skattning">';
+                echo '</form>';
+
+            }
+            else {
+                echo '</td><td align="right">';
+                echo 'Klar ';
+                $h++;
+            }
+            echo '</td></tr>';
+            echo '</table>';
+            echo '<br />';
             $i++;
+        }
+        if ($h == $formCount) {
+            echo 'Tack! Du har nu fyllt i alla formulär.<br />';
+            echo '<a href="send-answers.php">Stäng fönstret</a>';
         }
     }
 
@@ -144,7 +168,7 @@
                 print_r($mysqli->error);
             }
             while($myRow = $result->fetch_array()) {
-              $altKeys[] = $myRow['alt_key'];
+                $altKeys[] = $myRow['alt_key'];
                 $altStrings[] = $myRow['alt_string'];
             }
             session_start();
@@ -177,7 +201,23 @@
     }
 
     // ----- Skicka svar till databasen -----
-    function sendAnswers($altKey) {
-        // INSERT INTO `ANSWER` (`alt_key`, `s_key`, `q_key`) VALUES ('81', '211', '21');
+    function sendAnswer($altKey, $sKey, $qKey) {
+
+        $sqlSendAnswer = "INSERT INTO `ANSWER` (`alt_key`, `s_key`, `q_key`) VALUES ('$altKey', '$sKey', '$qKey');";
+
+        // SQL Error message
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlSendAnswer);
+            print_r($mysqli->error);
+        }
+    }
+
+    // ----- skriv in resultat i databas -----
+    function sendResult($sKey, $res) {
+        $sqlSendResult = "INSERT INTO `RESULT` (`s_key`, `res_value`) VALUES ('$sKey', '$res');";
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlSendResult);
+            print_r($mysqli->error);
+        }
     }
 ?>
