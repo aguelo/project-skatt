@@ -16,7 +16,7 @@ h1 {
 }
 
 h2{
-    color:#fff;
+    color:#444;
     text-align:center;
 	margin:5px;
 }
@@ -94,6 +94,10 @@ header {
 .blue-bg {
     background:#4987c7;
     color:#ffffff;
+}
+
+.blue-bg h2 {
+	color:#fff;
 }
 
 .blue-bg p {
@@ -237,4 +241,19 @@ form {
 
 #export:hover {
 	background:#61a1e2;
-}	
+}
+
+/*List of forms for patient*/
+#formular input[type=submit] {
+	background:#4987c7;
+	color:#fff;
+	font-size:15px;
+	cursor:pointer;
+	border:2px solid #fff;
+	border-radius:10px;
+	padding:1%;
+}
+
+#formular input[type=submit]:hover {
+	background-color:#61a1e2;
+}
