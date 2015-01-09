@@ -116,7 +116,7 @@
 
         $i = 0;
         $h = 0;
-        
+
         while ($i < $formCount) {
             echo '<table>';
             echo '<tr><td>';
@@ -152,7 +152,7 @@
         }
         if ($h == $formCount) {
             echo 'Tack! Du har nu fyllt i alla formulär.<br />';
-            echo '<a href="send-answers.php">Stäng fönstret</a>';
+            echo '<a href="send-answers.php">Skicka till behandlare KNAPP!</a>';
         }
     }
 
