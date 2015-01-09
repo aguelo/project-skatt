@@ -212,4 +212,87 @@
             print_r($mysqli->error);
         }
     }
+
+    // ----- getAllTkeys funktion för newform.php -----
+    function getAllTkeys() {
+        $sqlGetAllTkeys = "SELECT DISTINCT TEMPLOGIN.t_key FROM TEMPLOGIN INNER JOIN RESULT INNER JOIN SKATTNING ON RESULT.s_key = SKATTNING.s_key AND SKATTNING.t_key = TEMPLOGIN.t_key WHERE SKATTNING.s_key = RESULT.s_key;";
+
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlGetAllTkeys);
+            print_r($mysqli->error);
+        }
+        while($myRow = $result->fetch_array()) {
+            $tKeys[] = $myRow['t_key'];
+        }
+        return $tKeys;
+
+    }
+
+    // ----- getSkey -----
+    function getSkeys($tKey) {
+        $sqlGetSkeys = "SELECT RESULT.s_key, SKATTNING.f_key FROM RESULT INNER JOIN SKATTNING INNER JOIN TEMPLOGIN ON RESULT.s_key = SKATTNING.s_key AND SKATTNING.t_key = TEMPLOGIN.t_key WHERE TEMPLOGIN.t_key = '$tKey';";
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlGetSkeys);
+            print_r($mysqli->error);
+        }
+        while($myRow = $result->fetch_array()) {
+            $sKeys[] = $myRow['s_key'];
+        }
+        return $sKeys;
+    }
+
+    // ----- getFkey function -----
+    function getFormKey($sKey) {
+        $sqlGetFormKey = "SELECT SKATTNING.f_key FROM SKATTNING WHERE SKATTNING.s_key = '$sKey';";
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlGetFormKey);
+            print_r($mysqli->error);
+        }
+        while($myRow = $result->fetch_array()) {
+            $fKey = $myRow['f_key'];
+        }
+        return $fKey;
+    }
+
+    // ----- getPatientID function -----
+    function getPatientID($tKey) {
+        $sqlGetPatientID = "SELECT TEMPLOGIN.p_number, PATIENT.p_firstname, PATIENT.p_lastname FROM TEMPLOGIN INNER JOIN PATIENT ON TEMPLOGIN.p_number = PATIENT.p_number WHERE TEMPLOGIN.t_key = '$tKey';";
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlGetPatientID);
+            print_r($mysqli->error);
+        }
+        while($myRow = $result->fetch_array()) {
+            $patient[] = $myRow['p_number'];
+            $patient[] = $myRow['p_firstname'] . ' ' . $myRow['p_lastname'];
+            //$patient[] = $myRow['p_lastname'];
+        }
+        return $patient;
+    }
+
+    // ----- getResult function för newform.php -----
+    function getResult($sKey) {
+        $sqlGetResult = "SELECT RESULTSTRING.string FROM RESULT INNER JOIN RESULTSTRING ON (RESULT.str_key = RESULTSTRING.str_key) WHERE RESULT.s_key = '$sKey';";
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlGetResult);
+            print_r($mysqli->error);
+        }
+        while($myRow = $result->fetch_array()) {
+            $resultstring = $myRow['string'];
+        }
+        return $resultstring;
+    }
+
+    // ----- Get Result Date -----
+    function getResultDate($tKey) {
+        $sqlGetResultDate = "SELECT DISTINCT RESULT.r_timestamp FROM RESULT INNER JOIN TEMPLOGIN INNER JOIN SKATTNING ON RESULT.s_key = SKATTNING.s_key AND SKATTNING.t_key = TEMPLOGIN.t_key WHERE TEMPLOGIN.t_key = '$tKey';";
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlGetResultDate);
+            print_r($mysqli->error);
+        }
+        while($myRow = $result->fetch_array()) {
+            $timestamp = $myRow['r_timestamp'];
+        }
+        return $timestamp;
+    }
+
 ?>
