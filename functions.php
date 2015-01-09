@@ -144,7 +144,7 @@
         }
         if ($h == $formCount) {
             echo 'Tack! Du har nu fyllt i alla formulär.<br />';
-            echo '<a href="send-answers.php">Stäng fönstret</a>';
+            echo '<a href="send-answers.php">Skicka till behandlare KNAPP!</a>';
         }
     }
 
@@ -205,8 +205,8 @@
     }
 
     // ----- skriv in resultat i databas -----
-    function sendResult($sKey, $res) {
-        $sqlSendResult = "INSERT INTO `RESULT` (`s_key`, `res_value`) VALUES ('$sKey', '$res');";
+    function sendResult($sKey, $strKey, $res) {
+        $sqlSendResult = "INSERT INTO `RESULT` (`s_key`, `str_key`, `res_value`) VALUES ('$sKey', '$strKey', '$res');";
         if ($mysqli = connect_db()) {
             $result = $mysqli->query($sqlSendResult);
             print_r($mysqli->error);
