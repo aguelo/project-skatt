@@ -35,9 +35,8 @@
         $i++;
         //echo '<br />';
     }
-    
+
     // DELETE TEMPLOGIN!!!
 
-    session_destroy();
-    header('Location: login.php')
+    header('Location: thanks.php')
 ?>

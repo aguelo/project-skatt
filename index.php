@@ -103,5 +103,8 @@
 	</body>
     <footer>
         <p>Skapad av oss</p>
+        <a href="add_patient.php">Lägg till patient</a>
+        <br />
+        <a href="login.php">Logga in</a>
     </footer>
 </html>
