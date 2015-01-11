@@ -104,7 +104,7 @@
                                         response( $.map( data, function( item ) {
                                             var code = item.split("|");
                                             return {
-                                                label: code[0],
+                                                label: code[0] +  " (" + code[1] + " " + code[2] + ")",
                                                 value: code[0],
                                                 data : item
                                             }
