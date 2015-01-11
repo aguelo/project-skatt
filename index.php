@@ -8,29 +8,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-    <script>
-    $(function() {
-
-        $('#abbrev').val("");
-
-        $("#state").autocomplete({
-            source: "states.php",
-            minLength: 2,
-            select: function(event, ui) {
-                $('#state_id').val(ui.item.p_number);
-                $('#abbrev').val(ui.item.p_lastname);
-            }
-        });
-
-        $("#state_abbrev").autocomplete({
-            source: "states_abbrev.php",
-            minLength: 2
-        });
-    });
-
-    </script>
+    <link rel="stylesheet" href="js/jquery.css" />
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <title>Webbskattningsportalen</title>
 </head>
 	<body>
@@ -95,33 +76,53 @@
                         else {
                                 session_start();
                             ?>
-<!--
+
                             <h2>Skicka ny skattning</h2>
                             <form action="" method="post">
                             <label for="patient_number">Personnummer: </label>
                             <input name="patient_number" type="text" id="personnummer">
                             <label for="patient_firstname">Förnamn: </label>
-                            <input name="patient_firstname" type="text">
+                            <input name="patient_firstname" type="text" id="firstname" readonly>
                             <label for="patient_lastname">Efternamn: </label>
-                            <input name="patient_lastname" type="text">
+                            <input name="patient_lastname" type="text" id="lastname" readonly>
                             <label for="patient_email">Epostadress: </label>
-                            <input name="patient_email" type="text">
--->
-                        <form action="<?php echo $PHP_SELF;?>" method="post">
-                            <fieldset>
-                                <legend>jQuery UI Autocomplete Example - PHP Backend</legend>
-                                <p>Start typing the name of a state or territory of the United States</p>
-                                <p class="ui-widget">
-                                    <label for="state">State (abbreviation in separate field): </label>
-                                    <input type="text" id="state"  name="state" />
-                                    <input readonly="readonly" type="text" id="abbrev" name="abbrev" maxlength="2" size="2"/></p>
-                                <input type="hidden" id="state_id" name="state_id" />
-                                <p class="ui-widget">
-                                    <label for="state_abbrev">State (replaced with abbreviation): </label>
-                                    <input type="text" id="state_abbrev" name="state_abbrev" /></p>
-                                <p><input type="submit" name="submitBtn" value="Submit" /></p>
-                            </fieldset>
-                        </form>
+                            <input name="patient_email" type="text" id="email" readonly>
+
+                        <!-- JQuery Autocomplete script. Skickar förfrågning till ajax.php -->
+                        <script>
+                        $('#personnummer').autocomplete({
+                            source: function( request, response ) {
+                                $.ajax({
+                                    url : 'ajax.php',
+                                    dataType: "json",
+                                    data: {
+                                        name_startsWith: request.term,
+                                        type: 'patient',
+                                        row_num : 1
+                                    },
+                                    success: function( data ) {
+                                        response( $.map( data, function( item ) {
+                                            var code = item.split("|");
+                                            return {
+                                                label: code[0],
+                                                value: code[0],
+                                                data : item
+                                            }
+                                        }));
+                                    }
+                                });
+                            },
+                            autoFocus: true,
+                            minLength: 0,
+                            select: function( event, ui ) {
+                                var names = ui.item.data.split("|");
+                                $('#firstname').val(names[1]);
+                                $('#lastname').val(names[2]);
+                                $('#email').val(names[3]);
+                            }
+                        });
+                        </script>
+
                         <?php
                         if (isset($_POST['submit'])) {
                             echo "<p>";
