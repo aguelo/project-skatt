@@ -17,9 +17,16 @@
             </div>
             <div class="main">
             <h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
+            <?php
+                $tKeys = getAllTkeys();
+                if (!empty($tKeys)) {
+            ?>
             <div class="med-width grey-bg" id="ny-skatt">
                 <a href="newforms.php">Nya skattningar! <img src="img/warning.svg"></a>
             </div>
+            <?php
+                }
+            ?>
             <!-- Funktion som gör att notifikation endast syns om en ny skattning är inkommen?-->
             <div class="med-width blue-bg" id="send-module">
                 <p>
