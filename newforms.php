@@ -74,9 +74,11 @@ session_start();
                     </tr>
                 <?php
                 // SKAPA ARRAY FÖR RAD:
+                //$arrcount < 7;
                 $topcount = 0;
                     foreach ($tKeys as $tKey) {
-                        $checkbox = '<input type="checkbox" name="' . $tKey . '">';
+                        $checkbox = '<input type="checkbox" name="mark[ ]" value="' . $tKey . '">';
+
                         $date = getResultDate($tKey);
 
                         $result = array();
@@ -115,15 +117,30 @@ session_start();
 
                         if (!isset($result[7])) { $result[7] = '-'; }
 
+                        $result[] = '<input type="hidden" name="s_key[]" value="' . $sKeys . '">';
+
                         echo '<tr>';
+                        //$arrcount = 0;
+                        /*while ($arrcount < 8) {
+                            echo '<td>';
+                            echo $result[$arrcount];
+                            echo '</td>';
+                            $arrcount++;
+                        }*/
+                        /*
+                        for ($arrcount = 0; $arrcount < 7; $arrcount++) {
+                            echo '<td>';
+                            echo $result[$arrcount];
+                            echo '</td>';
+                        } */
+
                         foreach ($result as $values) {
                             echo '<td>';
                             echo $values;
                             echo '</td>';
                         }
                         echo '</tr>';
-                        $results[] = $result;
-                        $_SESSION['results'] = $results;
+
                         $topcount++;
                     }
 
@@ -133,12 +150,22 @@ session_start();
     <?php
         }
         else {
-            
-            foreach ($_SESSION['results'] as $result) {
-                foreach ($result as $value) {
-                    echo $value . ' | ';
-                }
-                echo '<br />';
+            //echo $_POST['mark'][0];
+
+            $resultsToDeploy = $_POST['mark'];
+            $sKeysToDeploy = $_POST['s_keys'];
+            foreach ($resultsToDeploy as $resultTkey) {
+                exportResult($resultTkey);
+                //$sKeys = getSkeys($resultTkey);
+                //foreach ($sKeys as $skey) {
+                //    deleteResult($sKey);
+                //}
+            }
+            $resultCount = count($resultsToDeploy);
+            if ($resultCount == 1) {
+                echo 'Skattningen är nu skickad till journalsystemet.';
+            } else {
+                echo 'Skattningarna är nu skickade till journalsystemet.';
             }
         }
     ?>

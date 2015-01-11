@@ -295,4 +295,39 @@
         return $timestamp;
     }
 
+    // ----- exportResult function -----
+    function exportResult($tKey) {
+        $sqlExport = "SELECT RESULT.s_key, RESULT.str_key, RESULT.res_value, RESULTSTRING.string, TEMPLOGIN.p_number, PATIENT.p_firstname, PATIENT.p_lastname FROM RESULT INNER JOIN TEMPLOGIN INNER JOIN SKATTNING INNER JOIN RESULTSTRING INNER JOIN PATIENT ON RESULT.s_key = SKATTNING.s_key AND SKATTNING.t_key = TEMPLOGIN.t_key AND RESULT.str_key = RESULTSTRING.str_key AND TEMPLOGIN.p_number = PATIENT.p_number WHERE TEMPLOGIN.t_key = '$tKey';";
+
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlExport);
+            print_r($mysqli->error);
+        }
+        while($myRow = $result->fetch_array()) {
+            $sKey = $myRow['s_key'];
+            $strKey = $myRow['str_key'];
+            $resValue = $myRow['res_value'];
+            $resString = $myRow['string'];
+            $pNumber = $myRow['p_number'];
+            $firstName = $myRow['p_firstname'];
+            $lastName = $myRow['p_lastname'];
+        }
+        $filename = 'data_skattning_' . $sKey . '.txt';
+        $exportfile = fopen($filename, 'w');
+        $text = 'Personnummer: ' . $pNumber . ' Namn: ' . $firstName . ' ' . $lastName . ' Status: ' . $resString . ' str_key: ' . $strKey . ' res_value: ' . $resValue;
+        fwrite($exportfile, $text);
+        fclose($exportfile);
+    }
+
+    // ----- DELETE RESULT FUNCT. -----
+    function deleteResult($sKey) {
+        $sqlDeleteResult = "DELETE FROM RESULT WHERE s_key = '$sKey';";
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlDeleteResult);
+            print_r($mysqli->error);
+        }
+        $mysqli->query($sqlDeleteResult);
+
+    }
+
 ?>

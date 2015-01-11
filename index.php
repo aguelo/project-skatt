@@ -8,6 +8,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="js/jquery.css" />
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <title>Webbskattningsportalen</title>
 </head>
 	<body>
@@ -17,9 +21,16 @@
             </div>
             <div class="main">
             <h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
+            <?php
+                $tKeys = getAllTkeys();
+                if (!empty($tKeys)) {
+            ?>
             <div class="med-width grey-bg" id="ny-skatt">
                 <a href="newforms.php">Nya skattningar! <img src="img/warning.svg"></a>
             </div>
+            <?php
+                }
+            ?>
             <!-- Funktion som gör att notifikation endast syns om en ny skattning är inkommen?-->
             <div class="med-width blue-bg" id="send-module">
                 <p>
@@ -70,18 +81,67 @@
                         }
                     // Om EJ skattning skickad (Start)
                         else {
-                            echo '<h2>Skicka ny skattning</h2>';
-                            session_start();
-                            echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
-                            echo '<label for="patient_number">Personnummer: </label>';
-                            echo '<input name="patient_number" type="text">';
-                            echo '<label for="patient_firstname">Förnamn: </label>';
-                            echo '<input name="patient_firstname" type="text">';
-                            echo '<label for="patient_lastname">Efternamn: </label>';
-                            echo '<input name="patient_lastname" type="text">';
-                            echo '<label for="patient_email">Epostadress: </label>';
-                            echo '<input name="patient_email" type="text">';
+                                session_start();
+                            ?>
 
+                            <h2>Skicka ny skattning</h2>
+                            <form action="" method="post">
+                            <label for="patient_number">Personnummer: </label>
+                            <input name="patient_number" type="text" id="personnummer">
+                            <label for="patient_firstname">Förnamn: </label>
+                            <input name="patient_firstname" type="text" id="firstname" readonly>
+                            <label for="patient_lastname">Efternamn: </label>
+                            <input name="patient_lastname" type="text" id="lastname" readonly>
+                            <label for="patient_email">Epostadress: </label>
+                            <input name="patient_email" type="text" id="email" readonly>
+
+                        <!-- JQuery Autocomplete script. Skickar förfrågning till ajax.php -->
+                        <script>
+                        $('#personnummer').autocomplete({
+                            source: function( request, response ) {
+                                $.ajax({
+                                    url : 'ajax.php',
+                                    dataType: "json",
+                                    data: {
+                                        name_startsWith: request.term,
+                                        type: 'patient',
+                                        row_num : 1
+                                    },
+                                    success: function( data ) {
+                                        response( $.map( data, function( item ) {
+                                            var code = item.split("|");
+                                            return {
+                                                label: code[0] +  " (" + code[1] + " " + code[2] + ")",
+                                                value: code[0],
+                                                data : item
+                                            }
+                                        }));
+                                    }
+                                });
+                            },
+                            autoFocus: true,
+                            minLength: 0,
+                            select: function( event, ui ) {
+                                var names = ui.item.data.split("|");
+                                $('#firstname').val(names[1]);
+                                $('#lastname').val(names[2]);
+                                $('#email').val(names[3]);
+                            }
+                        });
+                        </script>
+
+                        <?php
+                        if (isset($_POST['submit'])) {
+                            echo "<p>";
+                            while (list($key,$value) = each($_POST)){
+                                echo "<strong>" . $key . "</strong> = ".$value."<br />";
+                            }
+                            echo "</p>";
+                        }
+                        ?>
+
+
+                            <?php
                             $sqlForms = "SELECT f_key, f_code, f_name FROM FORM;";
 
                             if ($mysqli = connect_db()) {
