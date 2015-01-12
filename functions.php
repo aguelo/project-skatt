@@ -61,12 +61,16 @@
        $msg2 = '
        <html>
        <head>
-       <title>Webbskattning - Inloggningsuppgifter</title>
+       <title>Webbskattningsportalen - Inloggningsuppgifter</title>
        </head>
        <body>
        <p>
-       Hej! Här kommer din webbskattning. Klicka på länken nedan för att logga in med ditt personnummer och koden: ' . $patientPass .
-       '<br /><a href="http://localhost:8888/project-skatt/login.php" target="_blank">Logga in</a>
+       Hej!
+       <br /> <br />
+       Här kommer din webbskattning.
+       <br /> Klicka på länken nedan för att logga in med ditt personnummer och din personliga kod. <br /> <br />
+       Personlig kod: <b>' . $patientPass . ' </b> <br />
+       <a href="http://localhost:8888/project-skatt/login.php" target="_blank">Logga in</a>
        </p>
        </body>
        </html>
@@ -75,7 +79,7 @@
        $headers = "MIME-Version: 1.0" . "\r\n";
        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-       mail($patientEmail, 'Webbskattning - Inloggning', $msg2, $headers);
+       mail($patientEmail, 'Webbskattningsportalen - Inloggning', $msg2, $headers);
        echo'<div class="grey-center">';
        echo '<p>Email sent to ' . $patientEmail . '</p>';
        echo '</div>';
