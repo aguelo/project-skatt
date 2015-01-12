@@ -58,7 +58,6 @@
     // ----- sendEmail function -----
     function sendEmail($patientEmail, $patientPass) {
        $msg = 'Hej! Här kommer din webbskattning. Klicka på länken nedan för att logga in med ditt personnummer och koden: ' . $patientPass;
-
        $msg2 = '
        <html>
        <head>
@@ -77,7 +76,9 @@
        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
        mail($patientEmail, 'Webbskattning - Inloggning', $msg2, $headers);
-       echo 'Email sent to ' . $patientEmail;
+       echo'<div class="grey-center">';
+       echo '<p>Email sent to ' . $patientEmail . '</p>';
+       echo '</div>';
        echo '<form method="post" action="index.php">
        <button type="submit">Tillbaka</button>
        </form>';
@@ -321,7 +322,8 @@
 
     // ----- exportResult function -----
     function exportResult($sKey) {
-        $sqlExport = "SELECT RESULT.s_key, RESULT.str_key, RESULT.res_value, RESULTSTRING.string, TEMPLOGIN.p_number, PATIENT.p_firstname, PATIENT.p_lastname, FORM.f_name FROM RESULT INNER JOIN TEMPLOGIN INNER JOIN SKATTNING INNER JOIN RESULTSTRING INNER JOIN PATIENT INNER JOIN FORM ON RESULT.s_key = SKATTNING.s_key AND SKATTNING.t_key = TEMPLOGIN.t_key AND RESULT.str_key = RESULTSTRING.str_key AND TEMPLOGIN.p_number = PATIENT.p_number AND FORM.f_key = SKATTNING.f_key WHERE RESULT.s_key = '$sKey';";
+        $sqlExport = "SELECT RESULT.s_key, RESULT.str_key, RESULT.res_value, RESULTSTRING.string, TEMPLOGIN.p_number, PATIENT.p_firstname, PATIENT.p_lastname, FORM.f_name FROM RESULT INNER JOIN TEMPLOGIN INNER JOIN SKATTNING INNER JOIN RESULTSTRING INNER JOIN PATIENT INNER JOIN FORM ON RESULT.s_key = SKATTNING.s_key AND SKATTNING.t_key = TEMPLOGIN.t_key AND RESULT.str_key = RESULTSTRING.str_key AND TEMPLOGIN.p_number = PATIENT.p_number
+        AND FORM.f_key = SKATTNING.f_key WHERE RESULT.s_key = '$sKey';";
 
         if ($mysqli = connect_db()) {
             $result = $mysqli->query($sqlExport);
@@ -368,15 +370,5 @@
         }
         $mysqli->query($sqlDeleteAnswer);
     }
-    /*
-    // ----- deleteTemplogin function -----
-    function deleteTemplogin($sKey) {
-        $sqlDeleteTemplogin = "DELETE FROM TEMPLOGIN INNER JOIN SKATTNING ON TEMPLOGIN.t_key = SKATTNING.t_key WHERE SKATTNING.s_key = '$sKey';";
-        if ($mysqli = connect_db()) {
-            $result = $mysqli->query($sqlDeleteTemplogin);
-            print_r($mysqli->error);
-        }
-        $mysqli->query($sqlDeleteTemplogin);
-    }
-    */
+
 ?>

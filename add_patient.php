@@ -15,14 +15,11 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Webbskattningsportalen</title>
     <body>
-        <div style="background:#D95050">
-            <header>
-            </header>
-        </div>
+		<div class="staff-admin">
         <h1><a href="add_patient.php"><img class="logo" src="img/portalen.png"></a></h1>
         <div class="med-width" id="new-forms">
         <a href="index.php">Index</a></div>
-        <div class="small-width blue-bg" id="login" style="background:#D95050">
+        <div class="small-width grey-bg" id="login">
             <?php
             if(isset($_POST['submit']))
             {
@@ -51,13 +48,14 @@
                 <input id="enamn" name="enamn" placeholder="Efternamn" type="text">
                 <label>E-post :</label>
                 <input id="epost" name="epost" placeholder="patient@mail.com" type="text">
-                <input style="background:#BD2B2B; border-color:#FC8080" name="submit" type="submit" value="Lägg till">
+                <input name="submit" type="submit" value="Lägg till">
             </form>
             <?php
             }
             ?>
             </div>
         </div>
+		</div>
     </body>
     <footer>
         <small><p>Skapad av Magnus Ulenius, Axel Jonsson, <br /> Johannes Swenson, Pietro Mattei och Johan Bergström. <br /><br />

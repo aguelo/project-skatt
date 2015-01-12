@@ -35,58 +35,51 @@
                 }
             }
             </script>
-            <form action=" <?php $_SERVER['PHP_SELF'] ?> " method="post">
-			<table>
-				<tr>
-					<td>
-						<!-- Markera alla skattningar, Behöver funktion?-->
-						Markera alla: <input type="checkbox" name="mark[ ]" onClick="toggle(this)" value="Markera alla">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<!-- Skicka till journal-knapp. Behöver funktion?-->
-						<button name="export" id="export">Skicka till journal</button>
-					</td>
-				</tr>
-			</table>
-			<!-- Loop som hämtar varje skattning till tabell nedan? -->
-			<div class="grey-bg" id="inkommen">
-                <?php
-                    //$tKeys = array();
-                    $tKeys = getAllTkeys();
 
-                    $results = array();
-                ?>
-                <table cellspacing="10">
-                    <tr>
-                        <th>
-                            <!-- Behöver funktion för att markera?-->
-                            <!-- <input type="checkbox" name="mark" value="Markera"> -->
-                        </th>
-                        <th>
-                            [Datum]
-                        </th>
-                        <th>
-                            [Personnummer]
-                        </th>
-                        <th>
-                            [Namn]
-                        </th>
-                        <th>
-                            [ALK-1]
-                        </th>
-                        <th>
-                            [DEP-2]
-                        </th>
-                        <th>
-                            [KLA-3]
-                        </th>
-                    </tr>
-                <?php
-                // SKAPA ARRAY FÖR RAD:
-                //$arrcount < 7;
-                $topcount = 0;
+			<div id="inkommen">
+				<form action=" <?php $_SERVER['PHP_SELF'] ?> " method="post">
+					<div class="mark-send">
+						<!-- Markera alla skattningar, Behöver funktion?-->
+						<input type="checkbox" name="mark[ ]" onClick="toggle(this)" value="Markera alla"> Markera alla
+					</div>
+
+				<!-- Loop som hämtar varje skattning till tabell nedan? -->
+				<div class="grey-bg" style="padding-bottom:15px;">
+					<?php
+						//$tKeys = array();
+						$tKeys = getAllTkeys();
+
+						$results = array();
+					?>
+					<table>
+						<tr>
+							<th>
+								<!-- Behöver funktion för att markera?-->
+								<!-- <input type="checkbox" name="mark" value="Markera"> -->
+							</th>
+							<th>
+								Datum
+							</th>
+							<th>
+								Personnummer
+							</th>
+							<th>
+								Namn
+							</th>
+							<th>
+								ALK-1
+							</th>
+							<th>
+								DEP-2
+							</th>
+							<th>
+								KLA-3
+							</th>
+						</tr>
+					<?php
+					// SKAPA ARRAY FÖR RAD:
+					//$arrcount < 7;
+                    $topcount = 0;
                     foreach ($tKeys as $tKey) {
                         $checkbox = '<input type="checkbox" name="mark[ ]" value="' . $tKey . '">';
 
@@ -112,17 +105,17 @@
                             $fKey = getFormKey($sKey);
                             switch ($fKey) {
                                 case 1:
-                                    $result[5] = getResult($sKey);
-                                    break;
+                                $result[5] = getResult($sKey);
+                                break;
                                 case 2:
-                                    if (!isset($result[5])) { $result[5] = '-'; }
-                                    $result[6] = getResult($sKey);
-                                    break;
+                                if (!isset($result[5])) { $result[5] = '-'; }
+                                $result[6] = getResult($sKey);
+                                break;
                                 case 3:
-                                    if (!isset($result[5])) { $result[5] = '-'; }
-                                    if (!isset($result[6])) { $result[6] = '-'; }
-                                    $result[7] = getResult($sKey);
-                                    break;
+                                if (!isset($result[5])) { $result[5] = '-'; }
+                                if (!isset($result[6])) { $result[6] = '-'; }
+                                $result[7] = getResult($sKey);
+                                break;
                             }
                         }
 
@@ -143,37 +136,46 @@
                         $topcount++;
                     }
 
+                    ?>
+                </table>
+                <?php
+                if (!isset($_POST['export'])) {
+
+                    echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">
+                    <!-- Skicka till journal-knapp. Behöver funktion?-->
+                    <button name="export" id="export">Skicka till journal</button>
+                    </div>';
+                }
                 ?>
-				</table>
             </form>
-    <?php
-        }
-        else {
+                <?php
+            }
+            else {
 
-            $resultsToDeploy = $_POST['mark'];
+                $resultsToDeploy = $_POST['mark'];
 
-            $sKeys = array();
-            foreach ($resultsToDeploy as $resultTkey) {
-                $sKeys = getSkeys($resultTkey);
-                foreach ($sKeys as $sKey) {
-                    exportResult($sKey);
-                    deleteResult($sKey);
-                    deleteAnswer($sKey);
+                $sKeys = array();
+                foreach ($resultsToDeploy as $resultTkey) {
+                    $sKeys = getSkeys($resultTkey);
+                    foreach ($sKeys as $sKey) {
+                        exportResult($sKey);
+                        deleteResult($sKey);
+                        deleteAnswer($sKey);
+                    }
+                }
+
+
+
+                $resultCount = count($sKeys);
+                if ($resultCount == 1) {
+                    echo '<a href="index.php">Index</a>';
+                    echo '<h3>Skattningen är nu skickad till journalsystemet.</h3>';
+                } else {
+                    echo '<a href="index.php">Index</a>';
+                    echo '<h3>Skattningarna är nu skickade till journalsystemet.</h3>';
                 }
             }
-
-
-
-            $resultCount = count($sKeys);
-            if ($resultCount == 1) {
-				echo '<a href="index.php">Index</a>';
-                echo '<h3>Skattningen är nu skickad till journalsystemet.</h3>';
-            } else {
-				echo '<a href="index.php">Index</a>';
-                echo '<h3>Skattningarna är nu skickade till journalsystemet.</h3>';
-            }
-        }
-    ?>
+            ?>
 			</div>
 		</div>
 	</body>
