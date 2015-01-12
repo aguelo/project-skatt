@@ -23,13 +23,20 @@ session_start();
             <?php
                 if (!isset($_POST['export'])) {
             ?>
-
+            <script language="JavaScript">
+            function toggle(source) {
+                checkboxes = document.getElementsByName('mark[ ]');
+                for(var i=0, n=checkboxes.length;i<n;i++) {
+                    checkboxes[i].checked = source.checked;
+                }
+            }
+            </script>
             <form action=" <?php $_SERVER['PHP_SELF'] ?> " method="post">
 			<table>
 				<tr>
 					<td>
 						<!-- Markera alla skattningar, Behöver funktion?-->
-						Markera alla: <input type="checkbox" name="markall" value="Markera alla">
+						Markera alla: <input type="checkbox" name="mark[ ]" onClick="toggle(this)" value="Markera alla">
 					</td>
 				</tr>
 				<tr>
@@ -77,7 +84,7 @@ session_start();
                 //$arrcount < 7;
                 $topcount = 0;
                     foreach ($tKeys as $tKey) {
-                        $checkbox = '<input type="checkbox" name="mark[ ]" value="' . $tKey . '">';
+                        $checkbox = '<input type="checkbox" id="foo" name="mark[ ]" value="' . $tKey . '">';
 
                         $date = getResultDate($tKey);
 
@@ -173,6 +180,7 @@ session_start();
 		</div>
 	</body>
 	<footer>
-        <p>Skapad av oss</p>
+        <small><p>Skapad av Magnus Ulenius, Axel Jonsson, <br /> Johannes Swenson, Pietro Mattei och Johan Bergström. <br /><br />
+            &copy; 2015</p></small>
     </footer>
 </html>

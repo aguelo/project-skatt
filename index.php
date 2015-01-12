@@ -162,7 +162,8 @@
          </div>
 	</body>
     <footer>
-        <p>Skapad av oss</p>
+        <small><p>Skapad av Magnus Ulenius, Axel Jonsson, <br /> Johannes Swenson, Pietro Mattei och Johan Bergström. <br /><br />
+        &copy; 2015</p></small>
         <a href="add_patient.php">Lägg till patient</a>
         <br />
         <a href="login.php">Logga in</a>

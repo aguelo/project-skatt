@@ -112,7 +112,7 @@
         while ($i < $formCount) {
             echo '<table>';
             echo '<tr><td>';
-            echo $formKeys[$i] . ' ' . $formNames[$i];
+            echo $formNames[$i];
             //$check = 0;
             $sqlCheckAnswer = "SELECT s_key FROM ANSWER WHERE (s_key) = '$sKeys[$i]' LIMIT 1;";
             // SQL Error message
