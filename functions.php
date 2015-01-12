@@ -58,7 +58,25 @@
     // ----- sendEmail function -----
     function sendEmail($patientEmail, $patientPass) {
        $msg = 'Hej! Här kommer din webbskattning. Klicka på länken nedan för att logga in med ditt personnummer och koden: ' . $patientPass;
-       mail($patientEmail, 'Webbskattning', $msg);
+
+       $msg2 = '
+       <html>
+       <head>
+       <title>Webbskattning - Inloggningsuppgifter</title>
+       </head>
+       <body>
+       <p>
+       Hej! Här kommer din webbskattning. Klicka på länken nedan för att logga in med ditt personnummer och koden: ' . $patientPass .
+       '<br /><a href="http://localhost:8888/project-skatt/login.php" target="_blank">Logga in</a>
+       </p>
+       </body>
+       </html>
+       ';
+
+       $headers = "MIME-Version: 1.0" . "\r\n";
+       $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+       mail($patientEmail, 'Webbskattning - Inloggning', $msg2, $headers);
        echo 'Email sent to ' . $patientEmail;
        echo '<form method="post" action="index.php">
        <button type="submit">Tillbaka</button>
@@ -302,8 +320,8 @@
     }
 
     // ----- exportResult function -----
-    function exportResult($tKey) {
-        $sqlExport = "SELECT RESULT.s_key, RESULT.str_key, RESULT.res_value, RESULTSTRING.string, TEMPLOGIN.p_number, PATIENT.p_firstname, PATIENT.p_lastname FROM RESULT INNER JOIN TEMPLOGIN INNER JOIN SKATTNING INNER JOIN RESULTSTRING INNER JOIN PATIENT ON RESULT.s_key = SKATTNING.s_key AND SKATTNING.t_key = TEMPLOGIN.t_key AND RESULT.str_key = RESULTSTRING.str_key AND TEMPLOGIN.p_number = PATIENT.p_number WHERE TEMPLOGIN.t_key = '$tKey';";
+    function exportResult($sKey) {
+        $sqlExport = "SELECT RESULT.s_key, RESULT.str_key, RESULT.res_value, RESULTSTRING.string, TEMPLOGIN.p_number, PATIENT.p_firstname, PATIENT.p_lastname, FORM.f_name FROM RESULT INNER JOIN TEMPLOGIN INNER JOIN SKATTNING INNER JOIN RESULTSTRING INNER JOIN PATIENT INNER JOIN FORM ON RESULT.s_key = SKATTNING.s_key AND SKATTNING.t_key = TEMPLOGIN.t_key AND RESULT.str_key = RESULTSTRING.str_key AND TEMPLOGIN.p_number = PATIENT.p_number AND FORM.f_key = SKATTNING.f_key WHERE RESULT.s_key = '$sKey';";
 
         if ($mysqli = connect_db()) {
             $result = $mysqli->query($sqlExport);
@@ -317,12 +335,17 @@
             $pNumber = $myRow['p_number'];
             $firstName = $myRow['p_firstname'];
             $lastName = $myRow['p_lastname'];
+            $fName = $myRow['f_name'];
         }
         $filename = 'data_skattning_' . $sKey . '.txt';
         $exportfile = fopen($filename, 'w');
-        $text = 'Personnummer: ' . $pNumber . ' Namn: ' . $firstName . ' ' . $lastName . ' Status: ' . $resString . ' str_key: ' . $strKey . ' res_value: ' . $resValue;
+        $text = 'Personnummer: ' . $pNumber . ' Namn: ' . $firstName . ' ' . $lastName . ' Formulär: ' . $fName . ' Status: ' . $resString;
         fwrite($exportfile, $text);
         fclose($exportfile);
+
+        //file_put_contents($filename, $text, FILE_APPEND | LOCK_EX);
+
+        echo $filename . ' ' . '<a class="download-button" href="/' . $filename . '" download > Download </a>';
     }
 
     // ----- DELETE RESULT FUNCT. -----
@@ -335,5 +358,24 @@
         $mysqli->query($sqlDeleteResult);
 
     }
-
+    // ----- deleteAnswer function -----
+    function deleteAnswer($sKey) {
+        $sqlDeleteAnswer = "DELETE FROM ANSWER WHERE s_key = '$sKey';";
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlDeleteAnswer);
+            print_r($mysqli->error);
+        }
+        $mysqli->query($sqlDeleteAnswer);
+    }
+    /*
+    // ----- deleteTemplogin function -----
+    function deleteTemplogin($sKey) {
+        $sqlDeleteTemplogin = "DELETE FROM TEMPLOGIN INNER JOIN SKATTNING ON TEMPLOGIN.t_key = SKATTNING.t_key WHERE SKATTNING.s_key = '$sKey';";
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlDeleteTemplogin);
+            print_r($mysqli->error);
+        }
+        $mysqli->query($sqlDeleteTemplogin);
+    }
+    */
 ?>
