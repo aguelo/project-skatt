@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['v_email'])) {
+        header('Location: v_login.php');
+    }
     include('db_connection.php');
     require('functions.php');
 ?>
@@ -166,6 +170,7 @@
         &copy; 2015</p></small>
         <a href="add_patient.php">Lägg till patient</a>
         <br />
-        <a href="login.php">Logga in</a>
+        <a href="login.php">Patient inloggning</a><br />
+        <a href="v_logout.php">Logga ut vårdare</a>
     </footer>
 </html>
