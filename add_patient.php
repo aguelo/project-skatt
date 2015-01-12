@@ -56,6 +56,7 @@
         </div>
     </body>
     <footer>
-        <p>Skapad av oss</p>
+        <small><p>Skapad av Magnus Ulenius, Axel Jonsson, <br /> Johannes Swenson, Pietro Mattei och Johan Bergström. <br /><br />
+            &copy; 2015</p></small>
     </footer>
     </html>
