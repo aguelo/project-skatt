@@ -167,7 +167,7 @@
                 $resultCount = count($sKeys);
                 if ($resultCount == 1) {
                     echo '<a href="index.php">Index</a>';
-                    echo '<h3>Skattningen är nu skickad till journalsystemet.</h3>';
+                    echo '<div class="grey-center"><p>Denna sida simulerar en export till journalsystemet.<br /> Webbskattningarna är nu borttagna ur databasen och resultaten kan laddas ner i klartext ovan.</p></div>';
                 } else if ($resultCount != 1){
                     echo '<a href="index.php">Index</a>';
                     echo '<div class="grey-center"><p>Denna sida simulerar en export till journalsystemet.<br /> Webbskattningarna är nu borttagna ur databasen och resultaten kan laddas ner i klartext ovan.</p></div>';

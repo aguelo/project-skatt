@@ -24,7 +24,7 @@
           <div class="med-width" id="formular">
              <h2>Välkommen!</h2>
                 <?php
-                    echo '<p>Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. </p>';
+                    echo '<p class="grey-center">Vänligen fyll i nedanstående skattningar. Klicka på starta för att sätta igång. </p>';
                     getForm($_SESSION['p_number']);
                 ?>
           </div>
