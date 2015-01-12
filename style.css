@@ -253,16 +253,6 @@ header {
 	margin-top:2%;
 }
 
-.testing {
-	width:100%;
-	font-size:12px;
-	border-collapse:collapse;
-}
-
-.testing table tr {
-	border-bottom: 1px solid #ccc;
-}
-
 #inkommen table td, #inkommen table th {
 	padding-bottom:1%;
 	padding-top:1%;
