@@ -18,11 +18,12 @@ session_start();
 		</div>
 		<h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
 		<div class="med-width" id="new-forms">
-			<a href="index.php">Tillbaka</a>
 
             <?php
                 if (!isset($_POST['export'])) {
             ?>
+			<a href="index.php">Tillbaka</a>
+
             <script language="JavaScript">
             function toggle(source) {
                 checkboxes = document.getElementsByName('mark[ ]');
@@ -54,7 +55,7 @@ session_start();
 
                     $results = array();
                 ?>
-                <table>
+                <table cellspacing="10">
                     <tr>
                         <th>
                             <!-- Behöver funktion för att markera?-->
@@ -170,9 +171,11 @@ session_start();
             }
             $resultCount = count($resultsToDeploy);
             if ($resultCount == 1) {
-                echo 'Skattningen är nu skickad till journalsystemet.';
+				echo '<a href="index.php">Index</a>';
+                echo '<h3>Skattningen är nu skickad till journalsystemet.</h3>';
             } else {
-                echo 'Skattningarna är nu skickade till journalsystemet.';
+				echo '<a href="index.php">Index</a>';
+                echo '<h3>Skattningarna är nu skickade till journalsystemet.</h3>';
             }
         }
     ?>
