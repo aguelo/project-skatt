@@ -44,36 +44,36 @@
 					</div>	
 
 				<!-- Loop som hämtar varje skattning till tabell nedan? -->
-				<div class="grey-bg">
+				<div class="grey-bg" style="padding-bottom:15px;">
 					<?php
 						//$tKeys = array();
 						$tKeys = getAllTkeys();
 
 						$results = array();
 					?>
-					<table cellspacing="10">
+					<table>
 						<tr>
 							<th>
 								<!-- Behöver funktion för att markera?-->
 								<!-- <input type="checkbox" name="mark" value="Markera"> -->
 							</th>
 							<th>
-								[Datum]
+								Datum
 							</th>
 							<th>
-								[Personnummer]
+								Personnummer
 							</th>
 							<th>
-								[Namn]
+								Namn
 							</th>
 							<th>
-								[ALK-1]
+								ALK-1
 							</th>
 							<th>
-								[DEP-2]
+								DEP-2
 							</th>
 							<th>
-								[KLA-3]
+								KLA-3
 							</th>
 						</tr>
 					<?php

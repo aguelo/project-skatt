@@ -59,7 +59,9 @@
     function sendEmail($patientEmail, $patientPass) {
        $msg = 'Hej! Här kommer din webbskattning. Klicka på länken nedan för att logga in med ditt personnummer och koden: ' . $patientPass;
        mail($patientEmail, 'Webbskattning', $msg);
-       echo 'Email sent to ' . $patientEmail;
+		echo'<div class="grey-center">';
+       echo '<p>Email sent to ' . $patientEmail . '</p>';
+		echo '</div>';
        echo '<form method="post" action="index.php">
        <button type="submit">Tillbaka</button>
        </form>';
