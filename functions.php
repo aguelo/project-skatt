@@ -143,8 +143,14 @@
             $i++;
         }
         if ($h == $formCount) {
-            echo 'Tack! Du har nu fyllt i alla formulär.<br />';
-            echo '<a href="send-answers.php">Skicka till behandlare KNAPP!</a>';
+			echo '<div class="filled-form">';
+			echo '<table>';
+            echo '<tr><td align="center">Tack! Du har nu fyllt i alla formulär.<br /></td></tr>';
+			echo '<tr><td align="center"><form id="send-form" action="send-answers.php" method="post">';
+			echo '<input type="submit" name:"sendform" value="Skicka till behandlare"></td></tr>';
+			echo '</form></table>';
+			echo '</div>';
+            //echo '<a href="send-answers.php">Skicka till behandlare KNAPP!</a>';
         }
     }
 
@@ -290,7 +296,7 @@
             print_r($mysqli->error);
         }
         while($myRow = $result->fetch_array()) {
-            $timestamp = $myRow['r_timestamp'];
+            $timestamp = substr($myRow['r_timestamp'],2,14);
         }
         return $timestamp;
     }
