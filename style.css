@@ -392,3 +392,21 @@ header {
 	text-align:center;
 	color:#444;
 }
+
+#new-forms .download-button a {
+	border:none;
+	width:100%;
+	background:#61a1e2;
+	color:#fff;
+	border-radius:10px;
+	margin-top:1%;
+}
+
+.download {
+	width:30%;
+	margin:auto;
+}
+
+#new-forms .download-button a:hover {
+	background:#4987c7;
+}

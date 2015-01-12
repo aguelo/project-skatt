@@ -351,8 +351,9 @@
         fclose($exportfile);
 
         //file_put_contents($filename, $text, FILE_APPEND | LOCK_EX);
-
-        echo $filename . ' ' . '<a class="download-button" href="/' . $filename . '" download > Download </a>';
+		echo '<div class="download">';
+        echo $filename . ' ' . '<div class="download-button"><a href="/' . $filename . '" download > Download </a></div>';
+		echo '</div>';
     }
 
     // ----- DELETE RESULT FUNCT. -----
