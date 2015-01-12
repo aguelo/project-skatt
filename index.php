@@ -11,7 +11,7 @@
 <html xmnlns="http://www.w3.org/1999/xhtml" xml:lang="sv" lang="sv">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="stylesheet" href="js/jquery.css" />
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -39,7 +39,7 @@
 					echo '<div class="med-width grey-bg" id="send-module" style="border-radius:10px">';
 				}
             ?>
-            
+
                 <p>
                     <?php
                     //Om skattning är skickad
@@ -167,7 +167,7 @@
                         }
                         ?>
                     </p>
-					
+
             </div>
 				<div class="med-width" id="staff-nav">
 					<a href="add_patient.php">Lägg till patient</a>

@@ -34,7 +34,7 @@
                     $result = $mysqli->query($sqlSendPatient);
                     print_r($mysqli->error);
                 }
-                echo "<p>Patient tillagd</p>";
+                echo '<p class="grey-center">Patient tillagd</p>';
             }
             else {
             ?>

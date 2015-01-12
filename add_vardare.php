@@ -12,7 +12,7 @@
     <title>Webbskattningsportalen</title>
     <body>
 		<div class="staff-admin">
-        <h1><a href="add_patient.php"><img class="logo" src="img/portalen.png"></a></h1>	
+        <h1><a href="add_patient.php"><img class="logo" src="img/portalen.png"></a></h1>
         <div class="med-width" id="new-forms">
             <a href="v_login.php">Logga in</a></div>
             <div class="small-width grey-bg" id="login">
@@ -29,7 +29,7 @@
                         $result = $mysqli->query($sqlSendPatient);
                         print_r($mysqli->error);
                     }
-                    echo "<p>Vårdare tillagd</p>";
+                    echo '<p class="grey-center">Vårdare tillagd</p>';
                 }
                 else {
                     ?>
@@ -46,10 +46,10 @@
                     <?php
                 }
                 ?>
-				
+
             </div>
         </div>
-	</div>	
+	</div>
     </body>
     <footer>
         <small><p>Skapad av Magnus Ulenius, Axel Jonsson, <br /> Johannes Swenson, Pietro Mattei och Johan Bergström. <br /><br />
