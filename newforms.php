@@ -1,7 +1,10 @@
 <?php
-include('db_connection.php');
-require('functions.php');
-session_start();
+    session_start();
+    if (!isset($_SESSION['v_email'])) {
+        header('Location: v_login.php');
+    }
+    include('db_connection.php');
+    require('functions.php');
 ?>
 <!DOCTYPE html PUBLIC "-//w3c//DTD XHTMLm 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -184,6 +187,7 @@ session_start();
 	</body>
 	<footer>
         <small><p>Skapad av Magnus Ulenius, Axel Jonsson, <br /> Johannes Swenson, Pietro Mattei och Johan Bergström. <br /><br />
-            &copy; 2015</p></small>
+            &copy; 2015</p></small><br />
+        <a href="v_logout.php">Logga ut</a>
     </footer>
 </html>

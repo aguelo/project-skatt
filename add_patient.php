@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['v_email'])) {
+        header('Location: v_login.php');
+    }
     include('db_connection.php');
     require('functions.php');
 ?>
@@ -57,6 +61,7 @@
     </body>
     <footer>
         <small><p>Skapad av Magnus Ulenius, Axel Jonsson, <br /> Johannes Swenson, Pietro Mattei och Johan Bergström. <br /><br />
-            &copy; 2015</p></small>
+            &copy; 2015</p></small><br />
+        <a href="v_logout.php">Logga ut</a>
     </footer>
     </html>
