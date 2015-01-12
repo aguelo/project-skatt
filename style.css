@@ -253,6 +253,10 @@ header {
 	margin-top:2%;
 }
 
+#inkommen table {
+	font-size:12px;
+}
+
 #inkommen table td, #inkommen table th {
 	padding-bottom:1%;
 	padding-top:1%;
