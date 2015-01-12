@@ -339,5 +339,15 @@
         }
         $mysqli->query($sqlDeleteAnswer);
     }
-
+    /*
+    // ----- deleteTemplogin function -----
+    function deleteTemplogin($sKey) {
+        $sqlDeleteTemplogin = "DELETE FROM TEMPLOGIN INNER JOIN SKATTNING ON TEMPLOGIN.t_key = SKATTNING.t_key WHERE SKATTNING.s_key = '$sKey';";
+        if ($mysqli = connect_db()) {
+            $result = $mysqli->query($sqlDeleteTemplogin);
+            print_r($mysqli->error);
+        }
+        $mysqli->query($sqlDeleteTemplogin);
+    }
+    */
 ?>
