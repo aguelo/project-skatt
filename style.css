@@ -16,7 +16,7 @@ h1{
 }
 
 h2{
-    color:#444;
+    color:#4987c7;
     text-align:center;
 	margin:5px;
 }
@@ -83,7 +83,7 @@ header {
 /*Container, width 460px, centered*/
 .med-width {
 	width:40%;
-    min-width:460px;
+    min-width:500px;
     margin:auto;
     padding:1%;
 }
@@ -91,7 +91,6 @@ header {
 /*Grey background, blue text*/
 .grey-bg {
     color:#4987c7;
-    text-align:center;
     background:#f2f2f2;
 }
 
@@ -131,6 +130,7 @@ header {
 /*Notification for new incoming form*/
 #ny-skatt {
 	border-radius:10px 10px 0px 0px;
+	text-align: center;
 }
 
 /*Module for new form*/
@@ -212,6 +212,7 @@ header {
 	padding:10px;
 	border:1px solid #ccc;
 	border-radius:10px;
+	margin:5px 0;
 }
 
 #login input[type=submit] {
@@ -253,13 +254,19 @@ header {
 	margin-top:2%;
 }
 
+.mark-send {
+	margin-left:1px;
+}
+
 #inkommen table {
 	font-size:12px;
+	border-collapse:collapse;
 }
 
 #inkommen table td, #inkommen table th {
 	padding-bottom:1%;
 	padding-top:1%;
+	border-bottom:1px solid #ccc;
 }
 
 #export {
@@ -269,6 +276,7 @@ header {
 	cursor:pointer;
 	border: 2px solid #fff;
 	border-radius:10px;
+	margin-top:5%;
 }
 
 #export:hover {
@@ -348,4 +356,35 @@ header {
 	padding:5px;
 	margin-bottom:20px;
 	border-bottom:1px solid #ccc;
+}
+
+/*Login for staff*/
+.staff-admin .logo {
+	margin-top:5%;
+}
+
+.staff-admin .grey-bg {
+}
+
+#staff-nav {
+	text-align:center;
+}
+
+#staff-nav a {
+	padding:5px;
+	margin-left:3%;
+	background:#4987c7;
+	color:#fff;
+	border: 2px solid #95b9e4;
+	border-radius:10px;
+	font-size:14px;
+}
+
+#staff-nav a:hover {
+	background:#61a1e2;
+}
+
+.grey-center {
+	text-align:center;
+	color:#444;
 }

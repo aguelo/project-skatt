@@ -11,14 +11,10 @@
         <title>Webbskattningsportalen</title>
     </head>
     <body>
-        <div style="background:#4FBF54">
-            <header>
-            </header>
-        </div>
-        <div id="main">
+        <div class="staff-admin">
             <h1><a href="index.php"><img class="logo" src="img/portalen.png"></a></h1>
-            <div class="small-width blue-bg" id="login" style="background:#4FBF54">
-                <h2>Logga in som vårdare</h2>
+            <div class="small-width grey-bg" id="login">
+                <h2>Logga in</h2>
                 <form name="form1" method="post" action="check_vlogin.php">
                     <label>Email :</label>
                     <input id="name" name="username" placeholder="Email" type="text">

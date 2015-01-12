@@ -29,14 +29,17 @@
                 $tKeys = getAllTkeys();
                 if (!empty($tKeys)) {
             ?>
-            <div class="med-width grey-bg" id="ny-skatt">
-                <a href="newforms.php">Nya skattningar! <img src="img/warning.svg"></a>
+            <div class="med-width blue-bg" id="ny-skatt">
+                <a href="newforms.php">Det finns skattningar att skicka till journal! <img src="img/warning.svg"></a>
             </div>
             <?php
+					echo '<div class="med-width grey-bg" id="send-module";>';
                 }
+				else {
+					echo '<div class="med-width grey-bg" id="send-module" style="border-radius:10px">';
+				}
             ?>
-            <!-- Funktion som gör att notifikation endast syns om en ny skattning är inkommen?-->
-            <div class="med-width blue-bg" id="send-module">
+            
                 <p>
                     <?php
                     //Om skattning är skickad
@@ -50,8 +53,10 @@
 
                         // Om knapp är tryckt
                             if(empty($formToSend)) {
-                                echo "Du valde inga formulär att skicka med i skattningen!";
+								echo '<div class="grey-center">';
+                                echo "<p>Du valde inga formulär att skicka med i skattningen!</p>";
                                 echo '<form method="post" action="index.php"><button type="submit">Tillbaka</button></form>';
+								echo '</div>';
                             }
                         // Om inte intryckt
                             else {
@@ -162,15 +167,17 @@
                         }
                         ?>
                     </p>
+					
             </div>
+				<div class="med-width" id="staff-nav">
+					<a href="add_patient.php">Lägg till patient</a>
+					<a href="login.php">Patient inloggning</a>
+				</div>
          </div>
 	</body>
     <footer>
         <small><p>Skapad av Magnus Ulenius, Axel Jonsson, <br /> Johannes Swenson, Pietro Mattei och Johan Bergström. <br /><br />
         &copy; 2015</p></small>
-        <a href="add_patient.php">Lägg till patient</a>
-        <br />
-        <a href="login.php">Patient inloggning</a><br />
-        <a href="v_logout.php">Logga ut vårdare</a>
+        <a href="v_logout.php">Logga ut</a>
     </footer>
 </html>

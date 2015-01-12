@@ -20,10 +20,10 @@
             <div class="small-width blue-bg" id="login">
                 <h2>Logga in</h2>
                 <form name="form1" method="post" action="checklogin.php">
-                    <label>UserName :</label>
-                    <input id="name" name="username" placeholder="username" type="text">
-                    <label>Password :</label>
-                    <input id="password" name="password" placeholder="**********" type="password">
+                    <label>Personnummer :</label>
+                    <input id="name" name="username" placeholder="ÅÅMMDDXXXX" type="text">
+                    <label>Personlig kod :</label>
+                    <input id="password" name="password" placeholder="******" type="password">
                     <input name="submit" type="submit" value="Login">
                     <span><?php echo $error; ?></span>
                 </form>

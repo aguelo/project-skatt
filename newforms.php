@@ -35,154 +35,156 @@
                 }
             }
             </script>
-            <form action=" <?php $_SERVER['PHP_SELF'] ?> " method="post">
-			<table>
-				<tr>
-					<td>
+			
+			<div id="inkommen">	
+				<form action=" <?php $_SERVER['PHP_SELF'] ?> " method="post">
+					<div class="mark-send">
 						<!-- Markera alla skattningar, Behöver funktion?-->
-						Markera alla: <input type="checkbox" name="mark[ ]" onClick="toggle(this)" value="Markera alla">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<!-- Skicka till journal-knapp. Behöver funktion?-->
-						<button name="export" id="export">Skicka till journal</button>
-					</td>
-				</tr>
-			</table>
-			<!-- Loop som hämtar varje skattning till tabell nedan? -->
-			<div class="grey-bg" id="inkommen">
-                <?php
-                    //$tKeys = array();
-                    $tKeys = getAllTkeys();
+						<input type="checkbox" name="mark[ ]" onClick="toggle(this)" value="Markera alla"> Markera alla
+					</div>	
 
-                    $results = array();
-                ?>
-                <table cellspacing="10">
-                    <tr>
-                        <th>
-                            <!-- Behöver funktion för att markera?-->
-                            <!-- <input type="checkbox" name="mark" value="Markera"> -->
-                        </th>
-                        <th>
-                            [Datum]
-                        </th>
-                        <th>
-                            [Personnummer]
-                        </th>
-                        <th>
-                            [Namn]
-                        </th>
-                        <th>
-                            [ALK-1]
-                        </th>
-                        <th>
-                            [DEP-2]
-                        </th>
-                        <th>
-                            [KLA-3]
-                        </th>
-                    </tr>
-                <?php
-                // SKAPA ARRAY FÖR RAD:
-                //$arrcount < 7;
-                $topcount = 0;
-                    foreach ($tKeys as $tKey) {
-                        $checkbox = '<input type="checkbox" name="mark[ ]" value="' . $tKey . '">';
+				<!-- Loop som hämtar varje skattning till tabell nedan? -->
+				<div class="grey-bg">
+					<?php
+						//$tKeys = array();
+						$tKeys = getAllTkeys();
 
-                        $date = getResultDate($tKey);
+						$results = array();
+					?>
+					<table cellspacing="10">
+						<tr>
+							<th>
+								<!-- Behöver funktion för att markera?-->
+								<!-- <input type="checkbox" name="mark" value="Markera"> -->
+							</th>
+							<th>
+								[Datum]
+							</th>
+							<th>
+								[Personnummer]
+							</th>
+							<th>
+								[Namn]
+							</th>
+							<th>
+								[ALK-1]
+							</th>
+							<th>
+								[DEP-2]
+							</th>
+							<th>
+								[KLA-3]
+							</th>
+						</tr>
+					<?php
+					// SKAPA ARRAY FÖR RAD:
+					//$arrcount < 7;
+					$topcount = 0;
+						foreach ($tKeys as $tKey) {
+							$checkbox = '<input type="checkbox" name="mark[ ]" value="' . $tKey . '">';
 
-                        $result = array();
+							$date = getResultDate($tKey);
 
-                        $result[$topcount] = $checkbox;
-                        $result[$topcount+1] = $date;
+							$result = array();
 
-                        //echo $tKey;
-                        $patient = getPatientID($tKey);
+							$result[$topcount] = $checkbox;
+							$result[$topcount+1] = $date;
 
-                        foreach ($patient as $pInfo) {
-                            $result[] = $pInfo;
+							//echo $tKey;
+							$patient = getPatientID($tKey);
 
-                        }
-                        $sKeys = getSkeys($tKey);
-                        //echo $sKeys;
-                        $count = count($sKeys);
-                        foreach ($sKeys as $sKey) {
+							foreach ($patient as $pInfo) {
+								$result[] = $pInfo;
 
-                            $fKey = getFormKey($sKey);
-                            switch ($fKey) {
-                                case 1:
-                                    $result[5] = getResult($sKey);
-                                    break;
-                                case 2:
-                                    if (!isset($result[5])) { $result[5] = '-'; }
-                                    $result[6] = getResult($sKey);
-                                    break;
-                                case 3:
-                                    if (!isset($result[5])) { $result[5] = '-'; }
-                                    if (!isset($result[6])) { $result[6] = '-'; }
-                                    $result[7] = getResult($sKey);
-                                    break;
-                            }
-                        }
+							}
+							$sKeys = getSkeys($tKey);
+							//echo $sKeys;
+							$count = count($sKeys);
+							foreach ($sKeys as $sKey) {
 
-                        if (!isset($result[7])) { $result[7] = '-'; }
+								$fKey = getFormKey($sKey);
+								switch ($fKey) {
+									case 1:
+										$result[5] = getResult($sKey);
+										break;
+									case 2:
+										if (!isset($result[5])) { $result[5] = '-'; }
+										$result[6] = getResult($sKey);
+										break;
+									case 3:
+										if (!isset($result[5])) { $result[5] = '-'; }
+										if (!isset($result[6])) { $result[6] = '-'; }
+										$result[7] = getResult($sKey);
+										break;
+								}
+							}
 
-                        $result[] = '<input type="hidden" name="s_key[]" value="' . $sKeys . '">';
+							if (!isset($result[7])) { $result[7] = '-'; }
 
-                        echo '<tr>';
-                        //$arrcount = 0;
-                        /*while ($arrcount < 8) {
-                            echo '<td>';
-                            echo $result[$arrcount];
-                            echo '</td>';
-                            $arrcount++;
-                        }*/
-                        /*
-                        for ($arrcount = 0; $arrcount < 7; $arrcount++) {
-                            echo '<td>';
-                            echo $result[$arrcount];
-                            echo '</td>';
-                        } */
+							$result[] = '<input type="hidden" name="s_key[]" value="' . $sKeys . '">';
 
-                        foreach ($result as $values) {
-                            echo '<td>';
-                            echo $values;
-                            echo '</td>';
-                        }
-                        echo '</tr>';
+							echo '<tr>';
+							//$arrcount = 0;
+							/*while ($arrcount < 8) {
+								echo '<td>';
+								echo $result[$arrcount];
+								echo '</td>';
+								$arrcount++;
+							}*/
+							/*
+							for ($arrcount = 0; $arrcount < 7; $arrcount++) {
+								echo '<td>';
+								echo $result[$arrcount];
+								echo '</td>';
+							} */
 
-                        $topcount++;
-                    }
+							foreach ($result as $values) {
+								echo '<td>';
+								echo $values;
+								echo '</td>';
+							}
+							echo '</tr>';
 
-                ?>
-				</table>
-            </form>
-    <?php
-        }
-        else {
-            //echo $_POST['mark'][0];
+							$topcount++;
+						}
 
-            $resultsToDeploy = $_POST['mark'];
-            $sKeysToDeploy = $_POST['s_keys'];
-            foreach ($resultsToDeploy as $resultTkey) {
-                exportResult($resultTkey);
-                //$sKeys = getSkeys($resultTkey);
-                //foreach ($sKeys as $skey) {
-                //    deleteResult($sKey);
-                //}
-            }
-            $resultCount = count($resultsToDeploy);
-            if ($resultCount == 1) {
-				echo '<a href="index.php">Index</a>';
-                echo '<h3>Skattningen är nu skickad till journalsystemet.</h3>';
-            } else {
-				echo '<a href="index.php">Index</a>';
-                echo '<h3>Skattningarna är nu skickade till journalsystemet.</h3>';
-            }
-        }
-    ?>
+					?>
+					</table>
+				</form>
+		<?php
+			}
+			else {
+				//echo $_POST['mark'][0];
+
+				$resultsToDeploy = $_POST['mark'];
+				$sKeysToDeploy = $_POST['s_keys'];
+				foreach ($resultsToDeploy as $resultTkey) {
+					exportResult($resultTkey);
+					//$sKeys = getSkeys($resultTkey);
+					//foreach ($sKeys as $skey) {
+					//    deleteResult($sKey);
+					//}
+				}
+				$resultCount = count($resultsToDeploy);
+				if ($resultCount == 1) {
+					echo '<a href="index.php">Index</a>';
+					echo '<h3>Skattningen är nu skickad till journalsystemet.</h3>';
+				} else {
+					echo '<a href="index.php">Index</a>';
+					echo '<h3>Skattningarna är nu skickade till journalsystemet.</h3>';
+				}
+			}
+		?>
 			</div>
+		<?php	
+			if (!isset($_POST['export'])) {
+				
+				echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">
+					<!-- Skicka till journal-knapp. Behöver funktion?-->
+					<button name="export" id="export">Skicka till journal</button>
+				</div>';
+			}		
+		?>			
 		</div>
 	</body>
 	<footer>
