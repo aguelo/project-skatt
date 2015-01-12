@@ -138,7 +138,6 @@ session_start();
     <?php
         }
         else {
-            //echo $_POST['mark'][0];
 
             $resultsToDeploy = $_POST['mark'];
 

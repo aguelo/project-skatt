@@ -336,6 +336,10 @@
         $text = 'Personnummer: ' . $pNumber . ' Namn: ' . $firstName . ' ' . $lastName . ' Formulär: ' . $fName . ' Status: ' . $resString;
         fwrite($exportfile, $text);
         fclose($exportfile);
+
+        //file_put_contents($filename, $text, FILE_APPEND | LOCK_EX);
+
+        echo $filename . ' ' . '<a class="download-button" href="/' . $filename . '" download > Download </a>';
     }
 
     // ----- DELETE RESULT FUNCT. -----
