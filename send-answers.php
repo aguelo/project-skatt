@@ -47,7 +47,5 @@
 
     }
 
-    // DELETE TEMPLOGIN!!!
-
     header('Location: thanks.php')
 ?>

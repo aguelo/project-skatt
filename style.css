@@ -258,6 +258,7 @@ header {
 }
 
 #inkommen table {
+    width: 100%;
 	font-size:12px;
 	border-collapse:collapse;
 }
@@ -271,6 +272,8 @@ header {
 }
 
 #export {
+    margin-left: 23%;
+    width: 50%;
 	background:#4987c7;
 	color:#fff;
 	font-size:16px;

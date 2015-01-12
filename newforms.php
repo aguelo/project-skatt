@@ -35,13 +35,13 @@
                 }
             }
             </script>
-			
-			<div id="inkommen">	
+
+			<div id="inkommen">
 				<form action=" <?php $_SERVER['PHP_SELF'] ?> " method="post">
 					<div class="mark-send">
 						<!-- Markera alla skattningar, Behöver funktion?-->
 						<input type="checkbox" name="mark[ ]" onClick="toggle(this)" value="Markera alla"> Markera alla
-					</div>	
+					</div>
 
 				<!-- Loop som hämtar varje skattning till tabell nedan? -->
 				<div class="grey-bg" style="padding-bottom:15px;">
@@ -79,112 +79,104 @@
 					<?php
 					// SKAPA ARRAY FÖR RAD:
 					//$arrcount < 7;
-					$topcount = 0;
-						foreach ($tKeys as $tKey) {
-							$checkbox = '<input type="checkbox" name="mark[ ]" value="' . $tKey . '">';
+                    $topcount = 0;
+                    foreach ($tKeys as $tKey) {
+                        $checkbox = '<input type="checkbox" name="mark[ ]" value="' . $tKey . '">';
 
-							$date = getResultDate($tKey);
+                        $date = getResultDate($tKey);
 
-							$result = array();
+                        $result = array();
 
-							$result[$topcount] = $checkbox;
-							$result[$topcount+1] = $date;
+                        $result[$topcount] = $checkbox;
+                        $result[$topcount+1] = $date;
 
-							//echo $tKey;
-							$patient = getPatientID($tKey);
+                        //echo $tKey;
+                        $patient = getPatientID($tKey);
 
-							foreach ($patient as $pInfo) {
-								$result[] = $pInfo;
+                        foreach ($patient as $pInfo) {
+                            $result[] = $pInfo;
 
-							}
-							$sKeys = getSkeys($tKey);
-							//echo $sKeys;
-							$count = count($sKeys);
-							foreach ($sKeys as $sKey) {
+                        }
+                        $sKeys = getSkeys($tKey);
+                        //echo $sKeys;
+                        $count = count($sKeys);
+                        foreach ($sKeys as $sKey) {
 
-								$fKey = getFormKey($sKey);
-								switch ($fKey) {
-									case 1:
-										$result[5] = getResult($sKey);
-										break;
-									case 2:
-										if (!isset($result[5])) { $result[5] = '-'; }
-										$result[6] = getResult($sKey);
-										break;
-									case 3:
-										if (!isset($result[5])) { $result[5] = '-'; }
-										if (!isset($result[6])) { $result[6] = '-'; }
-										$result[7] = getResult($sKey);
-										break;
-								}
-							}
+                            $fKey = getFormKey($sKey);
+                            switch ($fKey) {
+                                case 1:
+                                $result[5] = getResult($sKey);
+                                break;
+                                case 2:
+                                if (!isset($result[5])) { $result[5] = '-'; }
+                                $result[6] = getResult($sKey);
+                                break;
+                                case 3:
+                                if (!isset($result[5])) { $result[5] = '-'; }
+                                if (!isset($result[6])) { $result[6] = '-'; }
+                                $result[7] = getResult($sKey);
+                                break;
+                            }
+                        }
 
-							if (!isset($result[7])) { $result[7] = '-'; }
+                        if (!isset($result[6])) { $result[6] = '-'; }
+                        if (!isset($result[7])) { $result[7] = '-'; }
 
-							$result[] = '<input type="hidden" name="s_key[]" value="' . $sKeys . '">';
+                        $result[] = '<input type="hidden" name="s_key[]" value="' . $sKeys . '">';
 
-							echo '<tr>';
-							//$arrcount = 0;
-							/*while ($arrcount < 8) {
-								echo '<td>';
-								echo $result[$arrcount];
-								echo '</td>';
-								$arrcount++;
-							}*/
-							/*
-							for ($arrcount = 0; $arrcount < 7; $arrcount++) {
-								echo '<td>';
-								echo $result[$arrcount];
-								echo '</td>';
-							} */
+                        echo '<tr>';
 
-							foreach ($result as $values) {
-								echo '<td>';
-								echo $values;
-								echo '</td>';
-							}
-							echo '</tr>';
+                        foreach ($result as $values) {
+                            echo '<td>';
+                            echo $values;
+                            echo '</td>';
+                        }
+                        echo '</tr>';
 
-							$topcount++;
-						}
+                        $topcount++;
+                    }
 
-					?>
-					</table>
-				</form>
-		<?php
-			}
-			else {
-				//echo $_POST['mark'][0];
+                    ?>
+                </table>
+                <?php
+                if (!isset($_POST['export'])) {
 
-				$resultsToDeploy = $_POST['mark'];
-				$sKeysToDeploy = $_POST['s_keys'];
-				foreach ($resultsToDeploy as $resultTkey) {
-					exportResult($resultTkey);
-					//$sKeys = getSkeys($resultTkey);
-					//foreach ($sKeys as $skey) {
-					//    deleteResult($sKey);
-					//}
-				}
-				$resultCount = count($resultsToDeploy);
-				if ($resultCount == 1) {
-					echo '<a href="index.php">Index</a>';
-					echo '<h3>Skattningen är nu skickad till journalsystemet.</h3>';
-				} else {
-					echo '<a href="index.php">Index</a>';
-					echo '<h3>Skattningarna är nu skickade till journalsystemet.</h3>';
-				}
-			}
-		?>
+                    echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">
+                    <!-- Skicka till journal-knapp. Behöver funktion?-->
+                    <button name="export" id="export">Skicka till journal</button>
+                    </div>';
+                }
+                ?>
+            </form>
+                <?php
+            }
+            else {
+
+                $resultsToDeploy = $_POST['mark'];
+
+                $sKeys = array();
+                foreach ($resultsToDeploy as $resultTkey) {
+                    $sKeys = getSkeys($resultTkey);
+                    foreach ($sKeys as $sKey) {
+                        exportResult($sKey);
+                        deleteResult($sKey);
+                        deleteAnswer($sKey);
+                    }
+                }
+
+
+
+                $resultCount = count($sKeys);
+                if ($resultCount == 1) {
+                    echo '<a href="index.php">Index</a>';
+                    echo '<h3>Skattningen är nu skickad till journalsystemet.</h3>';
+                } else {
+                    echo '<a href="index.php">Index</a>';
+                    echo '<h3>Skattningarna är nu skickade till journalsystemet.</h3>';
+                }
+            }
+            ?>
 			</div>
-		<?php	
-			if (!isset($_POST['export'])) {
-				
-				echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">
-					<!-- Skicka till journal-knapp. Behöver funktion?-->
-					<button name="export" id="export">Skicka till journal</button>
-				</div>';
-			}		
-		?>			
 		</div>
 	</body>
 	<footer>
