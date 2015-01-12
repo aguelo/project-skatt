@@ -115,24 +115,12 @@ session_start();
                             }
                         }
 
+                        if (!isset($result[6])) { $result[6] = '-'; }
                         if (!isset($result[7])) { $result[7] = '-'; }
 
                         $result[] = '<input type="hidden" name="s_key[]" value="' . $sKeys . '">';
 
                         echo '<tr>';
-                        //$arrcount = 0;
-                        /*while ($arrcount < 8) {
-                            echo '<td>';
-                            echo $result[$arrcount];
-                            echo '</td>';
-                            $arrcount++;
-                        }*/
-                        /*
-                        for ($arrcount = 0; $arrcount < 7; $arrcount++) {
-                            echo '<td>';
-                            echo $result[$arrcount];
-                            echo '</td>';
-                        } */
 
                         foreach ($result as $values) {
                             echo '<td>';
