@@ -84,7 +84,7 @@ session_start();
                 //$arrcount < 7;
                 $topcount = 0;
                     foreach ($tKeys as $tKey) {
-                        $checkbox = '<input type="checkbox" id="foo" name="mark[ ]" value="' . $tKey . '">';
+                        $checkbox = '<input type="checkbox" name="mark[ ]" value="' . $tKey . '">';
 
                         $date = getResultDate($tKey);
 
