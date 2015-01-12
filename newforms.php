@@ -141,15 +141,19 @@ session_start();
             //echo $_POST['mark'][0];
 
             $resultsToDeploy = $_POST['mark'];
-            $sKeysToDeploy = $_POST['s_keys'];
+
+            $sKeys = array();
             foreach ($resultsToDeploy as $resultTkey) {
-                exportResult($resultTkey);
-                //$sKeys = getSkeys($resultTkey);
-                //foreach ($sKeys as $skey) {
-                //    deleteResult($sKey);
-                //}
+                $sKeys = getSkeys($resultTkey);
             }
-            $resultCount = count($resultsToDeploy);
+
+            foreach ($sKeys as $sKey) {
+                exportResult($sKey);
+                deleteResult($sKey);
+                deleteAnswer($sKey);
+            }
+
+            $resultCount = count($sKeys);
             if ($resultCount == 1) {
                 echo 'Skattningen är nu skickad till journalsystemet.';
             } else {
