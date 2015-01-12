@@ -340,7 +340,8 @@
         $filename = 'data_skattning_' . $sKey . '.txt';
         $exportfile = fopen($filename, 'w');
         $text = 'Personnummer: ' . $pNumber . ' Namn: ' . $firstName . ' ' . $lastName . ' Formulär: ' . $fName . ' Status: ' . $resString;
-        fwrite($exportfile, $text);
+        //fwrite($exportfile, $text);
+        file_put_contents($filename, $text, FILE_APPEND | LOCK_EX);
         fclose($exportfile);
 
         //file_put_contents($filename, $text, FILE_APPEND | LOCK_EX);

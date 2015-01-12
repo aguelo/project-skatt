@@ -155,13 +155,14 @@
             $sKeys = array();
             foreach ($resultsToDeploy as $resultTkey) {
                 $sKeys = getSkeys($resultTkey);
+                foreach ($sKeys as $sKey) {
+                    exportResult($sKey);
+                    deleteResult($sKey);
+                    deleteAnswer($sKey);
+                }
             }
 
-            foreach ($sKeys as $sKey) {
-                exportResult($sKey);
-                deleteResult($sKey);
-                deleteAnswer($sKey);
-            }
+
 
             $resultCount = count($sKeys);
             if ($resultCount == 1) {
